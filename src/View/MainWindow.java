@@ -44,6 +44,7 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         iniPanel();
+        cPanel.initialize();
         JButton ejecBoton = new JButton("Ejecutar");
         ejecBoton.addActionListener(new ActionListener() {
             @Override

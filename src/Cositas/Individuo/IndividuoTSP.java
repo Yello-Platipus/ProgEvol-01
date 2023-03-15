@@ -31,9 +31,9 @@ public class IndividuoTSP extends Individuo<Integer>{
     public double getFitness() {
         double dist = 0;
         for (int i = 0; i < nCiudades - 1; i++) {
-            dist += _DIST[cromosoma[i]][cromosoma[i+1]];
+            dist += _DIST[cromosoma[i]][cromosoma[i + 1]];
         }
-        dist += _DIST[cromosoma[nCiudades-1]][cromosoma[0]];
+        dist += _DIST[cromosoma[nCiudades - 1]][cromosoma[0]];
         return dist;
     }
 
@@ -74,109 +74,6 @@ public class IndividuoTSP extends Individuo<Integer>{
             return -1;
         return 0;
     }
-
-
-    // NO MIRAR, ESTA FEO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // NO, EN SERIO, NO LO MIRES
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // POR TU PROPIO BIEN
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private final static int[][] _DIST = {
             {},
