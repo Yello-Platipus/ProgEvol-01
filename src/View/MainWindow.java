@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
 
         ag = new AlgoritmoGenetico();
         cPanel.setTarget(ag);
-        mSol = "            Mejor solucion: ";
+        mSol = "Mejor solucion: ";
         init();
 
     }
@@ -121,10 +121,10 @@ public class MainWindow extends JFrame {
                 "d", 1, Integer.MAX_VALUE));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de funcion", "Tipo de funcion",
-                "func", new Funcion[]{new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b()}));
+                "func", new Funcion[]{new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b(), new FuncionTSP()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",
-                "cruce", new Cruce[]{new CruceMonopunto(), new CruceUniforme()}));
+                "cruce", new Cruce[]{new CruceMonopunto(), new CruceUniforme(), new CrucePMX()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
                 "mut", new Mutacion[]{new MutacionBasica()}));

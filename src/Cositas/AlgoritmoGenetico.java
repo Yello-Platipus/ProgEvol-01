@@ -2,8 +2,10 @@ package Cositas;
 
 import Cositas.Cruce.Cruce;
 import Cositas.Cruce.CruceMonopunto;
+import Cositas.Cruce.CrucePMX;
 import Cositas.Funcion.Funcion;
 import Cositas.Funcion.Funcion3;
+import Cositas.Funcion.FuncionTSP;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.Mutacion;
 import Cositas.Mutacion.MutacionBasica;
@@ -47,9 +49,9 @@ public class AlgoritmoGenetico {
 		this.d = 2;
 		this.tamTorneo = 3;
 		this.sel = new SeleccionRuleta();
-		this.cruce = new CruceMonopunto();
+		this.cruce = new CrucePMX();
 		this.mut = new MutacionBasica();
-		this.func = new Funcion3();
+		this.func = new FuncionTSP();
 
 	}
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){

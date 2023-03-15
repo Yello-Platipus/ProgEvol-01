@@ -10,6 +10,7 @@ public class IndividuoTSP extends Individuo<Integer>{
         visitadas = new boolean[nCiudades];
         min = new double[nCiudades];
         max = new double[nCiudades];
+        tamGenes = new int[nCiudades];
         for(int i = 0; i< nCiudades; i++){
             min[i] = 0;
             max[i] = nCiudades - 1;
@@ -17,9 +18,14 @@ public class IndividuoTSP extends Individuo<Integer>{
         }
 
         this.cromosoma = new Integer[nCiudades];
-        for (int i = 0; i < nCiudades; i++) {
-            this.cromosoma[i] = Math.toIntExact(this.getRand().nextInt() % Math.round(max[0]));
-            visitadas[i] = true;
+
+        for (int i = 0; i < nCiudades;) {
+            int ciudad = (int) Math.round(this.getRand().nextDouble() * max[0]);
+            if(!visitadas[ciudad]){
+                this.cromosoma[i] = ciudad;
+                visitadas[ciudad] = true;
+                i++;
+            }
         }
     }
 
@@ -30,10 +36,10 @@ public class IndividuoTSP extends Individuo<Integer>{
     @Override
     public double getFitness() {
         double dist = 0;
-        for (int i = 0; i < nCiudades - 1; i++) {
-            dist += _DIST[cromosoma[i]][cromosoma[i + 1]];
+        for (int i = 1; i < nCiudades; i++) {
+            dist += _DIST[cromosoma[i-1]][cromosoma[i]];
         }
-        dist += _DIST[cromosoma[nCiudades - 1]][cromosoma[0]];
+        dist += _DIST[cromosoma[nCiudades-1]][cromosoma[0]];
         return dist;
     }
 
