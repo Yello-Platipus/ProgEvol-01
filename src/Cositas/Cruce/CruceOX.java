@@ -16,9 +16,9 @@ public class CruceOX extends Cruce{
         int tamPoblacion = poblacion.size();
         int tamCromosoma = poblacion.get(0).getCromosoma().length;
         for(int i = 0; i < tamPoblacion-1; i += 2) {
-            int pt1 = (int) Math.random() * tamPoblacion, pt2 = (int) Math.random() * tamPoblacion;
+            int pt1 = (int) (Math.random() * tamPoblacion), pt2 = (int) (Math.random() * tamPoblacion);
             while (pt1 == pt2) // Si los puntos son iguales, regenero el segundo punto
-                pt2 = (int) Math.random() * tamPoblacion;
+                pt2 = (int) (Math.random() * tamPoblacion);
             if (pt1 > pt2) { // Si el punto 1 es mayor que el punto 2, los intercambio
                 int aux = pt1;
                 pt1 = pt2;

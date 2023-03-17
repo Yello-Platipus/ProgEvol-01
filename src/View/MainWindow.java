@@ -125,7 +125,7 @@ public class MainWindow extends JFrame {
                 "func", new Funcion[]{new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b(), new FuncionTSP()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",
-                "cruce", new Cruce[]{new CruceMonopunto(), new CruceUniforme(), new CrucePMX()}));
+                "cruce", new Cruce[]{new CruceMonopunto(), new CruceUniforme(), new CrucePMX(), new CruceOX()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
                 "mut", new Mutacion[]{new MutacionBasica()}));
