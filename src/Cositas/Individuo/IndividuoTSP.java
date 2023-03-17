@@ -7,6 +7,7 @@ public class IndividuoTSP extends Individuo<Integer>{
 
     public IndividuoTSP(double precision, int d) {
         super(precision, d);
+        this.d = nCiudades;
         visitadas = new boolean[nCiudades];
         min = new double[nCiudades];
         max = new double[nCiudades];
@@ -31,6 +32,15 @@ public class IndividuoTSP extends Individuo<Integer>{
 
     public IndividuoTSP(IndividuoTSP ind){
         super(ind);
+        visitadas = new boolean[nCiudades];
+        for(int i = 0; i< nCiudades; i++){
+            this.cromosoma[i] = ind.getCromosoma()[i];
+            visitadas[i] = ind.getVisitadas()[i];
+        }
+    }
+
+    public boolean[] getVisitadas() {
+        return visitadas;
     }
 
     @Override
@@ -50,7 +60,7 @@ public class IndividuoTSP extends Individuo<Integer>{
 
     @Override
     public double getFenotipo(int x) {
-        return 0;
+        return cromosoma[x];
     }
 
     @Override
@@ -79,6 +89,19 @@ public class IndividuoTSP extends Individuo<Integer>{
         else if(this.getFitness() < o.getFitness())
             return -1;
         return 0;
+    }
+    @Override
+    public String toString(){
+        String r = "			Mejor solucion = ";
+        for(int i = 1; i <= nCiudades; i++){
+            r += "X" + i + "(" + getFenotipo(i-1) + ")";
+            if(i < nCiudades-1)
+                r+= ", ";
+            else if(i == nCiudades-1)
+                r +=" y ";
+        }
+        r+= " con fitness " + getFitness();
+        return r;
     }
 
     private final static int[][] _DIST = {
