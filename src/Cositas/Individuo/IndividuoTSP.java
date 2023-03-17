@@ -37,9 +37,21 @@ public class IndividuoTSP extends Individuo<Integer>{
     public double getFitness() {
         double dist = 0;
         for (int i = 1; i < nCiudades; i++) {
-            dist += _DIST[cromosoma[i-1]][cromosoma[i]];
+            int c1 = cromosoma[i - 1], c2 = cromosoma[i];
+            if (c1 < c2) {
+                int aux = c1;
+                c1 = c2;
+                c2 = aux;
+            }
+            dist += _DIST[c1][c2];
         }
-        dist += _DIST[cromosoma[nCiudades-1]][cromosoma[0]];
+        int c1 = cromosoma[nCiudades-1], c2 = cromosoma[0];
+        if (c1 < c2) {
+            int aux = c1;
+            c1 = c2;
+            c2 = aux;
+        }
+        dist += _DIST[c1][c2];
         return dist;
     }
 
@@ -50,7 +62,7 @@ public class IndividuoTSP extends Individuo<Integer>{
 
     @Override
     public double getFenotipo(int x) {
-        return 0;
+        return cromosoma[x];
     }
 
     @Override
