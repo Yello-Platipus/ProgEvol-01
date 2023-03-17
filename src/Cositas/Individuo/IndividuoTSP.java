@@ -2,7 +2,7 @@ package Cositas.Individuo;
 
 public class IndividuoTSP extends Individuo<Integer>{
 
-    private final int nCiudades = 27;
+    private final int nCiudades = 5;
     private boolean visitadas[];
 
     public IndividuoTSP(double precision, int d) {
@@ -33,6 +33,7 @@ public class IndividuoTSP extends Individuo<Integer>{
     public IndividuoTSP(IndividuoTSP ind){
         super(ind);
         visitadas = new boolean[nCiudades];
+        this.cromosoma = new Integer[nCiudades];
         for(int i = 0; i< nCiudades; i++){
             this.cromosoma[i] = ind.getCromosoma()[i];
             visitadas[i] = ind.getVisitadas()[i];
