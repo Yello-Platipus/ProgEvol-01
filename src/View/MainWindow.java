@@ -128,7 +128,7 @@ public class MainWindow extends JFrame {
                 "cruce", new Cruce[]{new CruceMonopunto(), new CruceUniforme(), new CrucePMX(), new CruceOX()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
-                "mut", new Mutacion[]{new MutacionBasica()}));
+                "mut", new Mutacion[]{new MutacionBasica(), new MutacionInsercion()}));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Proporcion de elite", "Proporcion de la poblacion que se guarda como elite",
                 "elitismo", 0, 1));
