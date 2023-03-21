@@ -113,7 +113,6 @@ public class AlgoritmoGenetico {
 		Collections.sort(poblacion);
 		for(int i = 0; i < numElite; i++){
 			poblacion.set(tamPoblacion-1-i,elite[i]);
-			//fitness[i] = elite[i].getFitness();
 		}
 		Collections.sort(poblacion);
 	}

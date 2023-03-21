@@ -2,7 +2,7 @@ package Cositas.Individuo;
 
 public class IndividuoTSP extends Individuo<Integer>{
 
-    private final int nCiudades = 5;
+    private final int nCiudades = 27;
     private boolean visitadas[];
 
     public IndividuoTSP(double precision, int d) {
@@ -105,13 +105,11 @@ public class IndividuoTSP extends Individuo<Integer>{
     }
     @Override
     public String toString(){
-        String r = "			Mejor solucion = ";
+        String r = "Mejor recorrido = ";
         for(int i = 1; i <= nCiudades; i++){
-            r += "X" + i + "(" + getFenotipo(i-1) + ")";
-            if(i < nCiudades-1)
-                r+= ", ";
-            else if(i == nCiudades-1)
-                r +=" y ";
+            r += getFenotipo(i-1) ;
+            if(i <= nCiudades - 1)
+                r+=  "-->";
         }
         r+= " con fitness " + getFitness();
         return r;
