@@ -105,11 +105,11 @@ public class IndividuoTSP extends Individuo<Integer>{
     }
     @Override
     public String toString(){
-        String r = "Mejor recorrido = ";
+        String r = "Mejor recorrido: ";
         for(int i = 1; i <= nCiudades; i++){
-            r += getFenotipo(i-1) ;
+            r += (int) getFenotipo(i-1);
             if(i <= nCiudades - 1)
-                r+=  "-->";
+                r+=  " ==> ";
         }
         r+= " con fitness " + getFitness();
         return r;

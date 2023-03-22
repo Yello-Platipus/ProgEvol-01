@@ -30,9 +30,9 @@ public class CruceOX extends Cruce{
             Individuo hijo1 = padre1.clonar();
             Individuo hijo2 = padre2.clonar();
             for (int j = pt1; j < pt2; j++) { // Copio los elementos entre pt1 y pt2 a los cromosomas de los hijos
-                hijo1.getCromosoma()[j] = padre2.getCromosoma()[j];
+                hijo1.setCromosoma(j, padre2.getCromosoma()[j]);
                 m1.add(hijo1.getCromosoma()[j]);
-                hijo2.getCromosoma()[j] = padre1.getCromosoma()[j];
+                hijo2.setCromosoma(j, padre1.getCromosoma()[j]);
                 m2.add(hijo2.getCromosoma()[j]);
             }
             // Copio los elementos del array que no esten repetidos CICLICAMENTE(desde pt2, hasta el final, y desde el principio hasta pt1)
@@ -40,14 +40,14 @@ public class CruceOX extends Cruce{
             for(int j = pt2; j != pt1 && (i1 != pt1 || i2 != pt1); j++){
                 j %= tamCromosoma;
                 if(!m1.contains(padre1.getCromosoma()[j])){
-                    hijo1.getCromosoma()[i1] = padre1.getCromosoma()[j];
-                    m1.add(hijo1.getCromosoma()[i1]);
+                    hijo1.setCromosoma(i1, padre1.getCromosoma()[j]);
+                    m1.add(padre1.getCromosoma()[j]);
                     i1++;
                     i1 %= tamCromosoma;
                 }
                 if(!m2.contains(padre2.getCromosoma()[j])){
-                    hijo2.getCromosoma()[i2] = padre2.getCromosoma()[j];
-                    m2.add(hijo2.getCromosoma()[i2]);
+                    hijo2.setCromosoma(i2, padre2.getCromosoma()[j]);
+                    m2.add(padre2.getCromosoma()[j]);
                     i2++;
                     i2 %= tamCromosoma;
                 }
