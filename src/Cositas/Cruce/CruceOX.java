@@ -37,7 +37,19 @@ public class CruceOX extends Cruce{
             }
             // Copio los elementos del array que no esten repetidos CICLICAMENTE(desde pt2, hasta el final, y desde el principio hasta pt1)
             int i1 = pt2, i2 = pt2;
-            for(int j = pt2; j != pt1 && (i1 != pt1 || i2 != pt1); j++){
+            if(!m1.contains(padre1.getCromosoma()[pt2])){
+                hijo1.setCromosoma(i1, padre1.getCromosoma()[pt2]);
+                m1.add(padre1.getCromosoma()[pt2]);
+                i1++;
+                i1 %= tamCromosoma;
+            }
+            if(!m2.contains(padre2.getCromosoma()[pt2])){
+                hijo2.setCromosoma(i2, padre2.getCromosoma()[pt2]);
+                m2.add(padre2.getCromosoma()[pt2]);
+                i2++;
+                i2 %= tamCromosoma;
+            }
+            for(int j = pt2 + 1; j != pt2 && (i1 != pt1 || i2 != pt1); j++){
                 j %= tamCromosoma;
                 if(!m1.contains(padre1.getCromosoma()[j])){
                     hijo1.setCromosoma(i1, padre1.getCromosoma()[j]);
