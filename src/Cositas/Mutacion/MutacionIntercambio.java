@@ -5,7 +5,7 @@ import Cositas.Individuo.Individuo;
 public class MutacionIntercambio extends Mutacion{
     @Override
     public String toString() {
-        return "Mutacion por Intercambio";
+        return "Mutacion por intercambio";
     }
 
     @Override
