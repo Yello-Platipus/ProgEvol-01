@@ -11,15 +11,22 @@ public class MutacionInsercion extends Mutacion{
     @Override
     public void mutar(Individuo ind, double probMutacion) {
         int tamCromosoma = ind.getCromosoma().length;
-        int nMutaciones = (int) (tamCromosoma * probMutacion);
-        for(int i = 0; i < nMutaciones; i++){
+        if(Math.random() < probMutacion) {
             int pos1 = (int) (Math.random() * tamCromosoma);
             int pos2 = (int) (Math.random() * tamCromosoma);
-            Object aux = ind.getCromosoma()[pos1];
-            for(int j = pos1; j < pos2; j++){
-                ind.getCromosoma()[j] = ind.getCromosoma()[j+1];
+            if(pos1 > pos2){
+                int aux = pos1;
+                pos1 = pos2;
+                pos2 = aux;
             }
-            ind.getCromosoma()[pos2] = aux;
+
+            Object aux = ind.getCromosoma()[pos1];
+
+            for (int j = pos1; j < pos2; j++) {
+
+                ind.setCromosoma(j,ind.getCromosoma()[j+1]);
+            }
+            ind.setCromosoma(pos2, aux);
         }
     }
 }
