@@ -1,14 +1,10 @@
 package Cositas;
 
-import Cositas.Cruce.Cruce;
-import Cositas.Cruce.CruceMonopunto;
-import Cositas.Cruce.CrucePMX;
+import Cositas.Cruce.*;
 import Cositas.Funcion.Funcion;
-import Cositas.Funcion.Funcion3;
 import Cositas.Funcion.FuncionTSP;
 import Cositas.Individuo.Individuo;
-import Cositas.Mutacion.Mutacion;
-import Cositas.Mutacion.MutacionBasica;
+import Cositas.Mutacion.*;
 import Cositas.Seleccion.Seleccion;
 import Cositas.Seleccion.SeleccionRuleta;
 
@@ -50,7 +46,7 @@ public class AlgoritmoGenetico {
 		this.tamTorneo = 3;
 		this.sel = new SeleccionRuleta();
 		this.cruce = new CrucePMX();
-		this.mut = new MutacionBasica();
+		this.mut = new MutacionIntercambio();
 		this.func = new FuncionTSP();
 
 	}
@@ -64,18 +60,8 @@ public class AlgoritmoGenetico {
 	}
 
 	public void evalPob(){
-		//fitness = new double[tamPoblacion];
 		Collections.sort(poblacion);
 		elMejor = poblacion.get(0);
-		/*
-		for(int i = 0; i < tamPoblacion; i++){
-			Individuo ind = poblacion.get(i);
-			//fitness[i] = ind.getFitness();
-			if(ind.compareTo(elMejor) == -1){
-				elMejor = ind;
-
-			}
-		}*/
 		mediaGen = calcularMediaGen();
 	}
 
