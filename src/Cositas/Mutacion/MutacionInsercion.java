@@ -19,7 +19,7 @@ public class MutacionInsercion extends Mutacion{
                 pos1 = pos2;
                 pos2 = aux;
             }
-
+            //TODO destinoi borra esto
             Object aux = ind.getCromosoma()[pos1];
 
             for (int j = pos1; j < pos2; j++) {
