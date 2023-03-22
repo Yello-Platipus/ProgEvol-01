@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import org.math.plot.*;
-import org.math.plot.plots.LinePlot;
 
 public class MainWindow extends JFrame {
     private Controller cont;
@@ -128,7 +127,7 @@ public class MainWindow extends JFrame {
                 "cruce", new Cruce[]{/*new CruceMonopunto(), new CruceUniforme(),*/ new CrucePMX(), new CruceOX(), new CruceOXPP()}));
         cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
-                "mut", new Mutacion[]{/*new MutacionBasica(),*/ new MutacionInsercion(), new MutacionIntercambio()}));
+                "mut", new Mutacion[]{/*new MutacionBasica(),*/ new MutacionInsercion(), new MutacionIntercambio(), new MutacionInversion()}));
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Proporcion de elite", "Proporcion de la poblacion que se guarda como elite",
                 "elitismo", 0, 1));
