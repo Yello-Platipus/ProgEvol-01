@@ -37,18 +37,18 @@ public class CruceOXPP extends Cruce{
                 hijo2.setCromosoma(random, padre1.getCromosoma()[random]);
                 m2.add(hijo2.getCromosoma()[random]);
             }
-            // Copio los elementos del array que no esten repetidos CICLICAMENTE(desde pt2, hasta el final, y desde el principio hasta pt1)
-            int i1 = ultimo + 1, i2 = ultimo + 1;
+            // TODO Hay que arreglar esto todavia, y preguntar si es obligatorio empezar desde la derecha del todo
+            // Probablemente sea buena idea borrarlo y hacerlo de cero
+            int i1 = ultimo, i2 = ultimo;
             for(int j = ultimo + 1; j != ultimo && (i1 != ultimo - 1 || i2 != ultimo - 1); j++){
                 j %= tamCromosoma;
-                if(!nAleatorios.contains(j)){
                     if(!m1.contains(padre1.getCromosoma()[j])){
                         hijo1.setCromosoma(i1, padre1.getCromosoma()[j]);
                         m1.add(padre1.getCromosoma()[j]);
                         do {
                             i1++;
                             i1 %= tamCromosoma;
-                        } while(nAleatorios.contains(padre1.getCromosoma()[i1]) && i1 != ultimo - 1);
+                        } while(m1.contains(padre1.getCromosoma()[i1]) && i1 != ultimo - 1);
                     }
                     if(!m2.contains(padre2.getCromosoma()[j])){
                         hijo2.setCromosoma(i2, padre2.getCromosoma()[j]);
@@ -56,9 +56,8 @@ public class CruceOXPP extends Cruce{
                         do {
                             i2++;
                             i2 %= tamCromosoma;
-                        } while(nAleatorios.contains(padre2.getCromosoma()[i2]) && i2 != ultimo - 1);
+                        } while(m2.contains(padre2.getCromosoma()[i2]) && i2 != ultimo - 1);
                     }
-                }
             }
             hijos.add(hijo1);
             hijos.add(hijo2);
