@@ -43,18 +43,17 @@ public class CruceOXPP extends Cruce{
                     i1++;
                 while(nAleatorios.contains(i2))
                     i2++;
-                if(!nAleatorios.contains(j)){
-                    if(!m1.contains(padre1.getCromosoma()[j])){
-                        hijo1.setCromosoma(i1, padre1.getCromosoma()[j]);
-                        m1.add(padre1.getCromosoma()[j]);
-                        i1++;
-                    }
-                    if(!m2.contains(padre2.getCromosoma()[j])){
-                        hijo2.setCromosoma(i2, padre2.getCromosoma()[j]);
-                        m2.add(padre2.getCromosoma()[j]);
-                        i2++;
-                    }
+                if(!m1.contains(padre1.getCromosoma()[j])){
+                    hijo1.setCromosoma(i1, padre1.getCromosoma()[j]);
+                    m1.add(padre1.getCromosoma()[j]);
+                    i1++;
                 }
+                if(!m2.contains(padre2.getCromosoma()[j])){
+                    hijo2.setCromosoma(i2, padre2.getCromosoma()[j]);
+                    m2.add(padre2.getCromosoma()[j]);
+                    i2++;
+                }
+
             }
 
             hijos.add(hijo1);
