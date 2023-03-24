@@ -34,7 +34,7 @@ public class CruceOXOP extends Cruce{
                         break;
                     }
                 }
-                hijo1.setCromosoma(pos2, padre1.getCromosoma()[pos2]);
+                hijo1.setCromosoma(pos2, padre1.getCromosoma()[random]);
             }
 
             pos1 = new ArrayList<Integer>();
@@ -50,7 +50,7 @@ public class CruceOXOP extends Cruce{
                         break;
                     }
                 }
-                hijo2.setCromosoma(pos2, padre2.getCromosoma()[pos2]);
+                hijo2.setCromosoma(pos2, padre2.getCromosoma()[random]);
             }
 
             hijos.add(hijo1);
