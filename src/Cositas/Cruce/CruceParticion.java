@@ -9,7 +9,7 @@ import java.util.Set;
 public class CruceParticion extends Cruce{
     @Override
     public String toString() {
-        return "Cruce de partición";
+        return "Cruce de particion";
     }
 
     @Override
@@ -25,8 +25,8 @@ public class CruceParticion extends Cruce{
 
             if(Math.random() < probCruce){
                 int particion = (int) (Math.random() * tamCromosoma);
-                Set i1 = new HashSet<Integer>();
-                Set i2 = new HashSet<Integer>();
+                Set i1 = new HashSet<Integer>(tamCromosoma);
+                Set i2 = new HashSet<Integer>(tamCromosoma);
 
                 for(int i = 0; i < tamCromosoma; i++){
                     i1.add(i);
