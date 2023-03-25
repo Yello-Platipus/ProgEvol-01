@@ -52,4 +52,5 @@ public class CruceMonopunto extends Cruce{
         }
     return cruzados;
     }
+
 }
