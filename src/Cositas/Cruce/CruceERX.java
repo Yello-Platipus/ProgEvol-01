@@ -27,7 +27,7 @@ public class CruceERX extends Cruce{
 
             // Creo el mapa de conexiones y lo inicializo
             HashMap<Object, HashSet<Object>> conexiones = new HashMap<>();
-            for(int j = 0; j < tamCromosoma; j++){
+            for(int j = 0; j <= tamCromosoma; j++){
                 conexiones.put(j, new HashSet<>());
             }
             // Relleno el mapa de conexiones
@@ -48,19 +48,49 @@ public class CruceERX extends Cruce{
             v1.add(padre1.getCromosoma()[0]);
             v2.add(padre2.getCromosoma()[0]);
             for(int pos = 1; pos < tamCromosoma; pos++){
-                ArrayList<Object> aceptables = new ArrayList<>();
+                ArrayList<Object> aceptables1 = new ArrayList<>();
+                ArrayList<Object> aceptables2 = new ArrayList<>();
+
                 int minConexiones = Integer.MAX_VALUE;
                 for(Object o : conexiones.get(hijo1.getCromosoma()[pos - 1])){
                     if(!v1.contains(o)) {
-                        if (conexiones.get(o).size() < minConexiones) {
-                            aceptables = new ArrayList<>();
-                            aceptables.add(o);
+                        if (conexionesValidas(conexiones, o, v1) < minConexiones) {
+                            aceptables1 = new ArrayList<>();
+                            aceptables1.add(o);
                             minConexiones = conexiones.get(o).size();
                         } else if (conexiones.get(o).size() == minConexiones)
-                            aceptables.add(o);
+                            aceptables1.add(o);
                     }
                 }
-                Object o = aceptables.get((int) Math.random() * aceptables.size());
+                //TODO EL PROBLEMA ES QUE PUEDE LLEGAR A UN PUNTO EN EL QUE ACEPTABLES NO TENGA ELEMENTOS
+                if(aceptables1.size() < 1){
+                    pos--;
+                    continue;
+                }
+
+                minConexiones = Integer.MAX_VALUE;
+
+                for(Object o : conexiones.get(hijo2.getCromosoma()[pos - 1])){
+                    if(!v2.contains(o)) {
+                        if (conexionesValidas(conexiones, o, v2) < minConexiones) {
+                            aceptables2 = new ArrayList<>();
+                            aceptables2.add(o);
+                            minConexiones = conexiones.get(o).size();
+                        } else if (conexiones.get(o).size() == minConexiones)
+                            aceptables2.add(o);
+                    }
+                }
+                if(aceptables2.size() < 1){
+                    pos--;
+                    continue;
+                }
+                Object obj = aceptables1.get((int) Math.random() * aceptables1.size());
+                v1.add(obj);
+                hijo1.setCromosoma(pos, obj);
+
+                obj = aceptables2.get((int) Math.random() * aceptables2.size());
+                v2.add(obj);
+                hijo2.setCromosoma(pos, obj);
             }
 
             hijos.add(hijo1);
@@ -68,5 +98,14 @@ public class CruceERX extends Cruce{
         }
 
         return hijos;
+    }
+
+    private int conexionesValidas(HashMap<Object, HashSet<Object>> conexiones, Object index, HashSet<Object> visitados){
+        int i = 0;
+        for(Object o : conexiones.get(index)){
+            if(!visitados.contains(o))
+                i++;
+        }
+        return i;
     }
 }
