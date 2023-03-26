@@ -1,7 +1,6 @@
 package Controller;
 
 import Cositas.AlgoritmoGenetico;
-import Cositas.Individuo.Individuo;
 
 public class Controller {
     private AlgoritmoGenetico ag;

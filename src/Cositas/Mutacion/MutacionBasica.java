@@ -17,8 +17,5 @@ public class MutacionBasica extends Mutacion{
                 cambios = true;
             }
         }
-        if(cambios){
-            //TODO refrescar fenotipo
-        }
     }
 }
