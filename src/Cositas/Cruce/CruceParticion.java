@@ -28,10 +28,12 @@ public class CruceParticion extends Cruce{
                 Set i1 = new HashSet<Integer>(tamCromosoma);
                 Set i2 = new HashSet<Integer>(tamCromosoma);
 
-                for(int i = 0; i < tamCromosoma; i++){
-                    i1.add(i);
-                    i2.add(i);
+                for(int i = 0; i <= tamCromosoma; i++){
+                        i1.add(i);
+                        i2.add(i);
                 }
+                i1.remove(25);
+                i2.remove(25);
                 Object[] c1 = padre1.getCromosoma();
                 Object[] c2 = padre2.getCromosoma();
                 Object[] crom1 = new Object[tamCromosoma];

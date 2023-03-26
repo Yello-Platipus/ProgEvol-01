@@ -2,8 +2,10 @@ package Cositas.Individuo;
 
 public class IndividuoTSP extends Individuo<Integer>{
 
-    private final int nCiudades = 27;
+    private final int nCiudades = 28;
     private boolean visitadas[];
+
+    final private int MADRID = 25;
 
     public IndividuoTSP(double precision, int d) {
         super(precision, d);
@@ -12,16 +14,16 @@ public class IndividuoTSP extends Individuo<Integer>{
         min = new double[nCiudades];
         max = new double[nCiudades];
         tamGenes = new int[nCiudades];
-        for(int i = 0; i< nCiudades; i++){
+        for(int i = 0; i < nCiudades; i++){
             min[i] = 0;
-            max[i] = nCiudades - 1;
+            max[i] = nCiudades;
             visitadas[i] = false;
         }
 
-        this.cromosoma = new Integer[nCiudades];
-
-        for (int i = 0; i < nCiudades;) {
-            int ciudad = (int) Math.round(this.getRand().nextDouble() * max[0]);
+        this.cromosoma = new Integer[nCiudades - 1];
+        visitadas[MADRID] = true;
+        for (int i = 0; i < nCiudades - 1;) {
+            int ciudad = (int)(this.getRand().nextDouble() * max[0]);
             if(!visitadas[ciudad]){
                 this.cromosoma[i] = ciudad;
                 visitadas[ciudad] = true;
@@ -33,8 +35,9 @@ public class IndividuoTSP extends Individuo<Integer>{
     public IndividuoTSP(IndividuoTSP ind){
         super(ind);
         visitadas = new boolean[nCiudades];
-        this.cromosoma = new Integer[nCiudades];
-        for(int i = 0; i< nCiudades; i++){
+        this.cromosoma = new Integer[nCiudades - 1];
+        visitadas[MADRID] = true;
+        for(int i = 0; i < nCiudades - 1; i++){
             this.cromosoma[i] = ind.getCromosoma()[i];
             visitadas[i] = ind.getVisitadas()[i];
         }
@@ -47,7 +50,7 @@ public class IndividuoTSP extends Individuo<Integer>{
     @Override
     public double getFitness() {
         double dist = 0;
-        for (int i = 1; i < nCiudades; i++) {
+        for (int i = 1; i < nCiudades - 1; i++) {
             int c1 = cromosoma[i - 1], c2 = cromosoma[i];
             if (c1 < c2) {
                 int aux = c1;
@@ -56,13 +59,16 @@ public class IndividuoTSP extends Individuo<Integer>{
             }
             dist += _DIST[c1][c2];
         }
-        int c1 = cromosoma[nCiudades-1], c2 = cromosoma[0];
-        if (c1 < c2) {
-            int aux = c1;
-            c1 = c2;
-            c2 = aux;
-        }
-        dist += _DIST[c1][c2];
+
+        int c1 = cromosoma[nCiudades-2], c2 = cromosoma[0];
+        if (c1 < MADRID)
+            dist+= _DIST[MADRID][c1];
+        else
+            dist += _DIST[c1][MADRID];
+        if(c2 < MADRID)
+            dist += _DIST[MADRID][c2];
+        else
+            dist += _DIST[c2][MADRID];
         return dist;
     }
 
@@ -105,16 +111,21 @@ public class IndividuoTSP extends Individuo<Integer>{
     }
     @Override
     public String toString(){
-        String r = "Mejor recorrido: ";
-        for(int i = 1; i <= nCiudades; i++){
-            r += (int) getFenotipo(i-1);
-            if(i <= nCiudades - 1)
-                r+=  " ==> ";
+        String r = "Mejor recorrido: Madrid ==> ";
+        for(int i = 1; i < nCiudades; i++){
+            if(i != MADRID){
+                r += ciudades[(int) getFenotipo(i-1)];
+                r +=  " ==> ";
+            }
         }
-        r+= " con fitness " + getFitness();
+        r+= "Madrid con fitness " + getFitness();
         return r;
     }
 
+    private final String[] ciudades ={
+            "Albacete", "Alicante", "Almería", "Ávila", "Badajoz", "Barcelona", "Bilbao", "Burgos", "Cáceres",
+            "Cádiz", "Castellón", "Ciudad Real", "Córdoba", "A Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara",
+            "Huelva", "Huesca", "Jaén", "León" , "Lérida", "Logroño", "Lugo", "Madrid", "Málaga", "Murcia"};
     private final static int[][] _DIST = {
             {},
             {171},
