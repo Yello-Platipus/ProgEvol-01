@@ -123,9 +123,9 @@ public class IndividuoTSP extends Individuo<Integer>{
     }
 
     private final String[] ciudades ={
-            "Albacete", "Alicante", "Almería", "Ávila", "Badajoz", "Barcelona", "Bilbao", "Burgos", "Cáceres",
-            "Cádiz", "Castellón", "Ciudad Real", "Córdoba", "A Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara",
-            "Huelva", "Huesca", "Jaén", "León" , "Lérida", "Logroño", "Lugo", "Madrid", "Málaga", "Murcia"};
+            "Albacete", "Alicante", "Almería", "Avila", "Badajoz", "Barcelona", "Bilbao", "Burgos", "Caceres",
+            "Cadiz", "Castellon", "Ciudad Real", "Cordoba", "A Coruna", "Cuenca", "Gerona", "Granada", "Guadalajara",
+            "Huelva", "Huesca", "Jaen", "Leon" , "Lerida", "Logrono", "Lugo", "Madrid", "Malaga", "Murcia"};
     private final static int[][] _DIST = {
             {},
             {171},
