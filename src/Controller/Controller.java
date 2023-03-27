@@ -40,6 +40,7 @@ public class Controller {
                 runIntervaloMut();
                 break;
             case "Cruce":
+                runIntervaloCruce();
                 break;
             case "Tamano":
                 break;
@@ -53,10 +54,39 @@ public class Controller {
         iniArraysIntervalos();
         for(int i = min; i < max; i+=cont){
             ag.setProbMutacion(i);
-
             for(int g = 0; g < maxGen; g++){
                 iteracion();
+                double actual = ag.getMejorFitness();
+                if(ag.esMejor(mejorEjec, actual))
+                    mejorEjec = actual;
             }
+            fitnessEjec[i-min] = mejorEjec;
+        }
+    }
+    private void runIntervaloCruce(){
+        iniArraysIntervalos();
+        for(int i = min; i < max; i+=cont){
+            ag.setProbCruce(i);
+            for(int g = 0; g < maxGen; g++){
+                iteracion();
+                double actual = ag.getMejorFitness();
+                if(ag.esMejor(mejorEjec, actual))
+                    mejorEjec = actual;
+            }
+            fitnessEjec[i-min] = mejorEjec;
+        }
+    }
+    private void runIntervaloPob(){
+        iniArraysIntervalos();
+        for(int i = min; i < max; i+=cont){
+            ag.setTamPoblacion(i);
+            for(int g = 0; g < maxGen; g++){
+                iteracion();
+                double actual = ag.getMejorFitness();
+                if(ag.esMejor(mejorEjec, actual))
+                    mejorEjec = actual;
+            }
+            fitnessEjec[i-min] = mejorEjec;
         }
     }
     private void runIntervaloless(){

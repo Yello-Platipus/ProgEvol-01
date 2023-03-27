@@ -211,7 +211,7 @@ public class AlgoritmoGenetico {
 	public int getD() {return d;}
 	public void setD(int d){this.d = d;}
 
-	public Boolean esMejor(double a, double b){
+	public Boolean esMejor(double a, double b){ // b mejor que a
 		if(func.toString().equalsIgnoreCase("Funcion 1"))
 			return a < b;
 		else return a > b;
