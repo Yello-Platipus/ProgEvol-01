@@ -18,26 +18,30 @@ import org.math.plot.*;
 public class MainWindow extends JFrame {
     private Controller cont;
     private ConfigPanel cPanel;
-
+    private String[] tipoIntervalo = {"Ninguno", "Mutacion", "Cruce", "Tamano"};
     private Plot2DPanel plot;
     private AlgoritmoGenetico ag;
     private JLabel mejorSol;
+    private JComboBox<String> tipo;
+    private JTextField min, max;
     String mSol;
-    private double[] numGen ;
-    private double[] mejorGen ;
+    private double[] numGen;
+    private double[] mejorGen;
     private double[] mejorAbs;
-    private double[] mediaGen ;
+    private double[] mediaGen;
+
     public MainWindow(Controller cont){
         super("Panel de configuracion");
         this.cont = cont;
         cPanel = new ConfigPanel<AlgoritmoGenetico>();
         plot = new Plot2DPanel();
-
+        tipo = new JComboBox<>(tipoIntervalo);
+        min = new JTextField("");
+        max = new JTextField("");
         ag = new AlgoritmoGenetico();
         cPanel.setTarget(ag);
         mSol = "Mejor solucion: ";
         init();
-
     }
     public void init(){
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,14 +52,35 @@ public class MainWindow extends JFrame {
         ejecBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    int minimo = Integer.parseInt(min.getText());
+                    int maximo = Integer.parseInt(max.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Introduce valores numericos en los campos de intervalo");
+                    return;
+                }
                 cPanel.initialize();
-                cont.run(ag);
+                cont.run(ag, Integer.parseInt(min.getText()), Integer.parseInt(max.getText()), tipo.getSelectedItem().toString());
                 plot.removeAll();
                 plot = new Plot2DPanel();
                 iniGrafica();
                 mSol = cont.getMejorIndAbs().toString();
                 mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
+                //setSize(1920, 1080);
+                //pack();
+                setVisible(true);
+            }
+        });
+        JButton resetBoton = new JButton("Reset");
+        resetBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cPanel.setTarget(new AlgoritmoGenetico());
+                plot = new Plot2DPanel();
+                iniGrafica();
+                mSol = cont.getMejorIndAbs();
+                mejorSol.setText(mSol);
                 setVisible(true);
             }
         });
@@ -67,10 +92,12 @@ public class MainWindow extends JFrame {
         ejecBoton.setFont(new Font("Arial", Font.PLAIN, 20));
         panelSur.add(ejecBoton, BorderLayout.EAST);
         panelSur.add(sPane, BorderLayout.CENTER);
+        //panelSur.add(resetBoton, BorderLayout.WEST);
 
+        //this.setSize(1920,1080);
         this.add(panelSur, BorderLayout.SOUTH);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+        //this.pack();
         this.setMinimumSize(new Dimension(1000, 600));
 
         this.setVisible(true);
@@ -117,6 +144,26 @@ public class MainWindow extends JFrame {
         cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Proporcion de elite", "Proporcion de la poblacion que se guarda como elite",
                 "elitismo", 0, 1));
+
+        cPanel.add(tipo);
+        JPanel intervalo = new JPanel(new FlowLayout());
+        min.setPreferredSize(new Dimension(150, 30));
+        max.setPreferredSize(new Dimension(150, 30));
+        intervalo.add(min);
+        intervalo.add(max);
+        intervalo.setVisible(false);
+        cPanel.add(intervalo);
+        tipo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!tipo.getSelectedItem().toString().equals("Ninguno")){
+                    intervalo.setVisible(true);
+                }
+                else{
+                    intervalo.setVisible(false);
+                }
+            }
+        });
         //cPanel.setSize(1000, 600);
         cPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.PAGE_AXIS));
