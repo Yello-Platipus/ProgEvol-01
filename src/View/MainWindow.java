@@ -56,20 +56,6 @@ public class MainWindow extends JFrame {
                 mSol = cont.getMejorIndAbs().toString();
                 mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
-                //setSize(1920, 1080);
-                //pack();
-                setVisible(true);
-            }
-        });
-        JButton resetBoton = new JButton("Reset");
-        resetBoton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cPanel.setTarget(new AlgoritmoGenetico());
-                plot = new Plot2DPanel();
-                iniGrafica();
-                mSol = cont.getMejorIndAbs();
-                mejorSol.setText(mSol);
                 setVisible(true);
             }
         });
@@ -81,12 +67,10 @@ public class MainWindow extends JFrame {
         ejecBoton.setFont(new Font("Arial", Font.PLAIN, 20));
         panelSur.add(ejecBoton, BorderLayout.EAST);
         panelSur.add(sPane, BorderLayout.CENTER);
-        //panelSur.add(resetBoton, BorderLayout.WEST);
 
-        //this.setSize(1920,1080);
         this.add(panelSur, BorderLayout.SOUTH);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //this.pack();
+
         this.setMinimumSize(new Dimension(1000, 600));
 
         this.setVisible(true);
