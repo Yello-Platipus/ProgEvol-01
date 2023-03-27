@@ -20,6 +20,7 @@ public class CruceERX extends Cruce{
         int tamCromosoma = poblacion.get(0).getCromosoma().length;
 
         for(int i = 0; i < tamPoblacion - 1; i += 2){
+            boolean roto = false;
             Individuo padre1 = poblacion.get(i);
             Individuo padre2 = poblacion.get(i + 1);
             Individuo hijo1 = padre1.clonar();
@@ -54,7 +55,7 @@ public class CruceERX extends Cruce{
                 int minConexiones = Integer.MAX_VALUE;
                 for(Object o : conexiones.get(hijo1.getCromosoma()[pos - 1])){
                     if(!v1.contains(o)) {
-                        if (conexionesValidas(conexiones, o, v1) < minConexiones) {
+                        if (conexiones.get(o).size() < minConexiones) {
                             aceptables1 = new ArrayList<>();
                             aceptables1.add(o);
                             minConexiones = conexiones.get(o).size();
@@ -64,15 +65,17 @@ public class CruceERX extends Cruce{
                 }
                 //TODO EL PROBLEMA ES QUE PUEDE LLEGAR A UN PUNTO EN EL QUE ACEPTABLES NO TENGA ELEMENTOS
                 if(aceptables1.size() < 1){
-                    pos--;
-                    continue;
+                    for(Object o : padre1.getCromosoma())
+                        if (!v1.contains(o)) {
+                            aceptables1.add(o);
+                        }
                 }
 
                 minConexiones = Integer.MAX_VALUE;
 
                 for(Object o : conexiones.get(hijo2.getCromosoma()[pos - 1])){
                     if(!v2.contains(o)) {
-                        if (conexionesValidas(conexiones, o, v2) < minConexiones) {
+                        if (conexiones.get(o).size() < minConexiones) {
                             aceptables2 = new ArrayList<>();
                             aceptables2.add(o);
                             minConexiones = conexiones.get(o).size();
@@ -81,9 +84,12 @@ public class CruceERX extends Cruce{
                     }
                 }
                 if(aceptables2.size() < 1){
-                    pos--;
-                    continue;
+                    for(Object o : padre2.getCromosoma())
+                        if (!v2.contains(o)) {
+                            aceptables2.add(o);
+                        }
                 }
+
                 Object obj = aceptables1.get((int) Math.random() * aceptables1.size());
                 v1.add(obj);
                 hijo1.setCromosoma(pos, obj);
@@ -100,6 +106,7 @@ public class CruceERX extends Cruce{
         return hijos;
     }
 
+    // Ignorar, probablemente sobra
     private int conexionesValidas(HashMap<Object, HashSet<Object>> conexiones, Object index, HashSet<Object> visitados){
         int i = 0;
         for(Object o : conexiones.get(index)){
