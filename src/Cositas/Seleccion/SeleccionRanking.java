@@ -9,7 +9,7 @@ public class SeleccionRanking extends Seleccion{
     private final static double beta = 1.5;
     @Override
     public String toString() {
-        return "Selección por ranking";
+        return "Seleccion por ranking";
     }
 
     @Override

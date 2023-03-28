@@ -32,7 +32,7 @@ public class SeleccionEstocasticaUniversal extends Seleccion{
                     if(fitness[tamPoblacion - 1] < 0)
                         corregirMaximizar(fitness[tamPoblacion - 1]);
             q++;
-        }while(fitness[0] == fitness[q]);
+        }while(q < tamPoblacion && fitness[0] == fitness[q]);
 
         for(int i = 0 ; i < tamPoblacion; i++){
             fitnessTotal += fitness[i];
