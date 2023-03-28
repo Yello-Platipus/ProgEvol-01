@@ -24,27 +24,28 @@ public class CruceCX extends Cruce{
             Individuo hijo1 = padre1.clonar();
             Individuo hijo2 = padre2.clonar();
 
-            HashMap<Object, Integer> m = new HashMap<Object, Integer>();
-            HashSet<Object> v1 = new HashSet<Object>();
-            HashSet<Object> v2 = new HashSet<Object>();
+            if(Math.random() < probCruce) {
+                HashMap<Object, Integer> m = new HashMap<Object, Integer>();
+                HashSet<Object> v1 = new HashSet<Object>();
+                HashSet<Object> v2 = new HashSet<Object>();
 
-            for(int j = 0; j < tamCromosoma; j++)
-                m.put(padre1.getCromosoma()[j], j);
+                for (int j = 0; j < tamCromosoma; j++)
+                    m.put(padre1.getCromosoma()[j], j);
 
-            int pos = 0;
-            while(!v1.contains(padre1.getCromosoma()[pos])){
-                v1.add(padre1.getCromosoma()[pos]);
-                v2.add(padre2.getCromosoma()[pos]);
-                pos = m.get(padre2.getCromosoma()[pos]);
+                int pos = 0;
+                while (!v1.contains(padre1.getCromosoma()[pos])) {
+                    v1.add(padre1.getCromosoma()[pos]);
+                    v2.add(padre2.getCromosoma()[pos]);
+                    pos = m.get(padre2.getCromosoma()[pos]);
+                }
+
+                for (int j = 0; j < tamCromosoma; j++) {
+                    if (!v1.contains(padre1.getCromosoma()[j]))
+                        hijo1.setCromosoma(j, padre2.getCromosoma()[j]);
+                    if (!v2.contains(padre2.getCromosoma()[j]))
+                        hijo2.setCromosoma(j, padre1.getCromosoma()[j]);
+                }
             }
-
-            for(int j = 0; j < tamCromosoma; j++){
-                if(!v1.contains(padre1.getCromosoma()[j]))
-                    hijo1.setCromosoma(j, padre2.getCromosoma()[j]);
-                if(!v2.contains(padre2.getCromosoma()[j]))
-                    hijo2.setCromosoma(j, padre1.getCromosoma()[j]);
-            }
-
             hijos.add(hijo1);
             hijos.add(hijo2);
         }

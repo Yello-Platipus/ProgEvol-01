@@ -31,7 +31,7 @@ public class Controller {
         this.min = min;
         this.max = max;
         cont = (max - min)/10;
-        maxGen = ag.getMaxGeneraciones() ;
+        maxGen = ag.getMaxGeneraciones();
         
         ag.initPob();
         ag.evalPob();
