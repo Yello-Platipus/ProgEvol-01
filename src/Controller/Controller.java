@@ -60,7 +60,7 @@ public class Controller {
     private void runIntervaloMut(){
         iniArraysIntervalos();
         int fCont =0;
-        for(int i = min; i < max; i+=cont){
+        for(int i = min; i <= max; i+=cont){
             ag.setProbMutacion((double)i/100);
             mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
@@ -80,7 +80,7 @@ public class Controller {
     private void runIntervaloCruce(){
         iniArraysIntervalos();
         int fCont = 0;
-        for(int i = min; i < max; i+=cont){
+        for(int i = min; i <= max; i+=cont){
             ag.setProbCruce((double)i/100);
             mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
@@ -102,7 +102,7 @@ public class Controller {
     private void runIntervaloPob(){
         iniArraysIntervalos();
         int fCont = 0;
-        for(int i = min; i < max; i+=cont){
+        for(int i = min; i <= max; i+=cont){
             ag.setTamPoblacion(i);
             ag.initPob();
             ag.evalPob();
@@ -151,8 +151,8 @@ public class Controller {
 
     private void iniArraysIntervalos(){
         
-        fitnessEjec = new double[(max-min)/cont];
-        numInterval = new double[(max-min)/cont];
+        fitnessEjec = new double[1+(max-min)/cont];
+        numInterval = new double[1+(max-min)/cont];
     }
     private void iteracion(){
         ag.generarElite();
