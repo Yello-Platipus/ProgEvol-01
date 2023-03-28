@@ -24,23 +24,27 @@ public class CruceCO extends Cruce {
             if(Math.random() < probCruce){
                 ArrayList<Integer> a1 = new ArrayList<Integer>();
                 ArrayList<Integer> a2 = new ArrayList<Integer>();
-                for(int i = 0; i < tamCromosoma; i++){
+                for(int i = 0; i <= tamCromosoma; i++){
                     a1.add(i);
                     a2.add(i);
                 }
+                a1.remove(25);
+                a2.remove(25);
                 int cod1[] = new int[tamCromosoma];
                 int cod2[] = new int[tamCromosoma];
                 Object[] c1 = hijo1.getCromosoma();
                 Object[] c2 = hijo2.getCromosoma();
                 //Obtengo la codificacion de los dos cromosomas
-                for(int i = 0; i < tamCromosoma; i++){
+                int q= 0;
+                for(Object o: c1){
                     int a,b;
-                    a = a1.indexOf(c1[i]);
-                    b = a2.indexOf(c2[i]);
-                    cod1[i] = a;
-                    cod2[i] = b;
+                    a = a1.indexOf(o);
+                    b = a2.indexOf(c2[q]);
+                    cod1[q] = a;
+                    cod2[q] = b;
                     a1.remove(a);
                     a2.remove(b);
+                    q++;
                 }
                 //Cruce monopunto de los dos arrays
                 monopunto(cod1, cod2);
@@ -48,10 +52,12 @@ public class CruceCO extends Cruce {
                 //Decodificacion
                 Object[] crom1 = new Object[tamCromosoma];
                 Object[] crom2 = new Object[tamCromosoma];
-                for(int i = 0; i < tamCromosoma; i++){
+                for(int i = 0; i <= tamCromosoma; i++){
                     a1.add(i);
                     a2.add(i);
                 }
+                a1.remove(25);
+                a2.remove(25);
 
                 for(int i = 0; i < tamCromosoma; i++){
                     crom1[i] = a1.get(cod1[i]);

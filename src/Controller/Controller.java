@@ -62,6 +62,7 @@ public class Controller {
         int fCont =0;
         for(int i = min; i <= max; i+=cont){
             ag.setProbMutacion((double)i/100);
+            ag.setPoblacion((ArrayList<Individuo>) original.clone());
             mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
                 iteracion();
@@ -82,6 +83,7 @@ public class Controller {
         int fCont = 0;
         for(int i = min; i <= max; i+=cont){
             ag.setProbCruce((double)i/100);
+            ag.setPoblacion((ArrayList<Individuo>) original.clone());
             mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
 
