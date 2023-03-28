@@ -18,7 +18,7 @@ import org.math.plot.*;
 public class MainWindow extends JFrame {
     private Controller cont;
     private ConfigPanel cPanel;
-    private String[] tipoIntervalo = {"Ninguno", "Mutacion", "Cruce", "Tamano"};
+    private String[] tipoIntervalo = {"Ninguno", "Porcentaje de mutacion", "Porcentaje de cruce", "Tamano de poblacion"};
     private Plot2DPanel plot;
     private AlgoritmoGenetico ag;
     private JLabel mejorSol;
@@ -29,6 +29,10 @@ public class MainWindow extends JFrame {
     private double[] mejorGen;
     private double[] mejorAbs;
     private double[] mediaGen;
+
+    private double[] fitnessEjec;
+
+    private double[] numIntervalo;
 
     public MainWindow(Controller cont){
         super("Panel de configuracion");
@@ -60,27 +64,21 @@ public class MainWindow extends JFrame {
                     return;
                 }
                 cPanel.initialize();
-                cont.run(ag, Integer.parseInt(min.getText()), Integer.parseInt(max.getText()), tipo.getSelectedItem().toString());
+                String aux = tipo.getSelectedItem().toString();
+                cont.run(ag, Integer.parseInt(min.getText()), Integer.parseInt(max.getText()),aux );
                 plot.removeAll();
                 plot = new Plot2DPanel();
-                iniGrafica();
-                mSol = cont.getMejorIndAbs().toString();
+                if(aux.equalsIgnoreCase("Ninguno")){
+                    iniGrafica();
+                    mSol = cont.getMejorIndAbs().toString();
+                }
+                else{
+                    iniGraficaInterval();
+                    mSol = "La mejor ejecucion ha sido con " + cont.getMejorEjecX() +
+                            " de " + aux.toLowerCase() + " con fitness: " + cont.getMejorAbs()[0];
+                }
                 mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
-                //setSize(1920, 1080);
-                //pack();
-                setVisible(true);
-            }
-        });
-        JButton resetBoton = new JButton("Reset");
-        resetBoton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cPanel.setTarget(new AlgoritmoGenetico());
-                plot = new Plot2DPanel();
-                iniGrafica();
-                mSol = cont.getMejorIndAbs();
-                mejorSol.setText(mSol);
                 setVisible(true);
             }
         });
@@ -92,16 +90,15 @@ public class MainWindow extends JFrame {
         ejecBoton.setFont(new Font("Arial", Font.PLAIN, 20));
         panelSur.add(ejecBoton, BorderLayout.EAST);
         panelSur.add(sPane, BorderLayout.CENTER);
-        //panelSur.add(resetBoton, BorderLayout.WEST);
 
-        //this.setSize(1920,1080);
         this.add(panelSur, BorderLayout.SOUTH);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //this.pack();
+
         this.setMinimumSize(new Dimension(1000, 600));
 
         this.setVisible(true);
     }
+
 
     public void iniPanel(){
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
@@ -164,7 +161,6 @@ public class MainWindow extends JFrame {
                 }
             }
         });
-        //cPanel.setSize(1000, 600);
         cPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.PAGE_AXIS));
         this.add(cPanel, BorderLayout.WEST);
@@ -193,7 +189,17 @@ public class MainWindow extends JFrame {
 
         // put the PlotPanel in a JFrame like a JPanel
 
-        //plot.setSize(600, 600);
+        this.add(plot, BorderLayout.CENTER);
+    }
+
+
+    private void iniGraficaInterval() {
+
+        fitnessEjec = cont.getFitnessEjec();
+        numIntervalo = cont.getNumInterval();
+
+        plot.addLegend("SOUTH");
+        plot.addLinePlot("Fitness", numIntervalo, fitnessEjec);
         this.add(plot, BorderLayout.CENTER);
     }
 }

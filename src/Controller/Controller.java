@@ -19,7 +19,10 @@ public class Controller {
     private int cont;
 
     private double mejorEjec;
+    private int mejorEjecX;
     private ArrayList<Individuo> original;
+    private double[] numInterval;
+
     public Controller(){
     }
 
@@ -29,20 +32,24 @@ public class Controller {
         this.max = max;
         cont = (max - min)/10;
         maxGen = ag.getMaxGeneraciones() ;
-
+        
         ag.initPob();
         ag.evalPob();
-        mejorEjec = ag.getMejorFitness();
+
+        mejorAbs = new double[1];
+        mejorAbs[0] = ag.getMejorFitness();
+        mejorEjecX = 0;
         original = (ArrayList<Individuo>) ag.getPoblacion().clone();
 
         switch(tipo){
-            case "Mutacion":
+            case "Porcentaje de mutacion":
                 runIntervaloMut();
                 break;
-            case "Cruce":
+            case "Porcentaje de cruce":
                 runIntervaloCruce();
                 break;
-            case "Tamano":
+            case "Tamano de poblacion":
+                runIntervaloPob();
                 break;
             default:
                 runIntervaloless();
@@ -52,41 +59,67 @@ public class Controller {
 
     private void runIntervaloMut(){
         iniArraysIntervalos();
+        int fCont =0;
         for(int i = min; i < max; i+=cont){
-            ag.setProbMutacion(i);
+            ag.setProbMutacion((double)i/100);
+            mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
                 iteracion();
                 double actual = ag.getMejorFitness();
                 if(ag.esMejor(mejorEjec, actual))
                     mejorEjec = actual;
             }
-            fitnessEjec[i-min] = mejorEjec;
+            if(ag.esMejor(mejorAbs[0], mejorEjec)) {
+                mejorAbs[0] = mejorEjec;
+                mejorEjecX = i;
+            }
+            numInterval[fCont] = i;
+            fitnessEjec[fCont++] = mejorEjec;
         }
     }
     private void runIntervaloCruce(){
         iniArraysIntervalos();
+        int fCont = 0;
         for(int i = min; i < max; i+=cont){
-            ag.setProbCruce(i);
+            ag.setProbCruce((double)i/100);
+            mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
+
                 iteracion();
                 double actual = ag.getMejorFitness();
                 if(ag.esMejor(mejorEjec, actual))
                     mejorEjec = actual;
             }
-            fitnessEjec[i-min] = mejorEjec;
+            if(ag.esMejor(mejorAbs[0], mejorEjec)) {
+                mejorAbs[0] = mejorEjec;
+                mejorEjecX = i;
+            }
+            numInterval[fCont] = i;
+            fitnessEjec[fCont++] = mejorEjec;
+
         }
     }
     private void runIntervaloPob(){
         iniArraysIntervalos();
+        int fCont = 0;
         for(int i = min; i < max; i+=cont){
             ag.setTamPoblacion(i);
+            ag.initPob();
+            ag.evalPob();
+            mejorEjec = ag.getMejorFitness();
+
             for(int g = 0; g < maxGen; g++){
                 iteracion();
                 double actual = ag.getMejorFitness();
                 if(ag.esMejor(mejorEjec, actual))
                     mejorEjec = actual;
             }
-            fitnessEjec[i-min] = mejorEjec;
+            if(ag.esMejor(mejorAbs[0], mejorEjec)) {
+                mejorAbs[0] = mejorEjec;
+                mejorEjecX = i;
+            }
+            numInterval[fCont] = i;
+            fitnessEjec[fCont++] = mejorEjec;
         }
     }
     private void runIntervaloless(){
@@ -117,7 +150,9 @@ public class Controller {
     }
 
     private void iniArraysIntervalos(){
-        fitnessEjec = new double[max/cont];
+        
+        fitnessEjec = new double[(max-min)/cont];
+        numInterval = new double[(max-min)/cont];
     }
     private void iteracion(){
         ag.generarElite();
@@ -152,4 +187,10 @@ public class Controller {
     public double[] getMediaGen(){return mediaGen;}
 
     public String getMejorIndAbs() { return mejorInd; }
+
+    public double[] getNumInterval(){return numInterval;}
+
+    public int getMejorEjecX(){return mejorEjecX;}
+
+    public double getMejorEjec(){return mejorEjec;}
 }
