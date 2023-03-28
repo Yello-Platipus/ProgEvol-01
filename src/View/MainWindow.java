@@ -56,18 +56,20 @@ public class MainWindow extends JFrame {
         ejecBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int minimo = 0;
+                int maximo = 0;
                 String aux = tipo.getSelectedItem().toString();
                 if(!aux.equalsIgnoreCase("Ninguno")) {
                     try {
-                        int minimo = Integer.parseInt(min.getText());
-                        int maximo = Integer.parseInt(max.getText());
+                        minimo = Integer.parseInt(min.getText());
+                        maximo = Integer.parseInt(max.getText());
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Introduce valores numericos en los campos de intervalo");
                         return;
                     }
                 }
                 cPanel.initialize();
-                cont.run(ag, Integer.parseInt(min.getText()), Integer.parseInt(max.getText()), aux);
+                cont.run(ag, minimo, maximo, aux);
                 plot.removeAll();
                 plot = new Plot2DPanel();
                 if(aux.equalsIgnoreCase("Ninguno")){
