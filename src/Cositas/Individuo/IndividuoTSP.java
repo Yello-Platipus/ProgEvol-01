@@ -88,7 +88,7 @@ public class IndividuoTSP extends Individuo<Integer>{
     }
 
     @Override
-    public Integer nextRandom() { // TODO COMPROBAR SI ESTA BIEN
+    public Integer nextRandom() {
         Integer coso = Math.toIntExact(Math.round((nCiudades - 1) * getRand().nextDouble()));
         while(visitadas[coso])
             coso = Math.toIntExact(Math.round((nCiudades - 1) * getRand().nextDouble()));
@@ -123,7 +123,7 @@ public class IndividuoTSP extends Individuo<Integer>{
     }
 
     private final String[] ciudades ={
-            "Albacete", "Alicante", "Almería", "Avila", "Badajoz", "Barcelona", "Bilbao", "Burgos", "Caceres",
+            "Albacete", "Alicante", "Almeria", "Avila", "Badajoz", "Barcelona", "Bilbao", "Burgos", "Caceres",
             "Cadiz", "Castellon", "Ciudad Real", "Cordoba", "A Coruna", "Cuenca", "Gerona", "Granada", "Guadalajara",
             "Huelva", "Huesca", "Jaen", "Leon" , "Lerida", "Logrono", "Lugo", "Madrid", "Malaga", "Murcia"};
     private final static int[][] _DIST = {

@@ -18,6 +18,12 @@ import org.math.plot.*;
 public class MainWindow extends JFrame {
     private Controller cont;
     private ConfigPanel cPanel;
+    private ConfigPanel panelCruce;
+    private ConfigPanel panelMutacion;
+    private ConfigPanel panelTamPoblacion;
+    private ConfigPanel panelNumGeneraciones;
+    private ConfigPanel panelPrecision;
+    private ConfigPanel panelTipoSeleccion;
     private String[] tipoIntervalo = {"Ninguno", "Porcentaje de mutacion", "Porcentaje de cruce", "Tamano de poblacion"};
     private Plot2DPanel plot;
     private AlgoritmoGenetico ag;
@@ -38,12 +44,24 @@ public class MainWindow extends JFrame {
         super("Panel de configuracion");
         this.cont = cont;
         cPanel = new ConfigPanel<AlgoritmoGenetico>();
+        panelCruce = new ConfigPanel<AlgoritmoGenetico>();
+        panelMutacion = new ConfigPanel<AlgoritmoGenetico>();
+        panelTamPoblacion = new ConfigPanel<AlgoritmoGenetico>();
+        panelNumGeneraciones = new ConfigPanel<AlgoritmoGenetico>();
+        panelPrecision = new ConfigPanel<AlgoritmoGenetico>();
+        panelTipoSeleccion = new ConfigPanel<AlgoritmoGenetico>();
         plot = new Plot2DPanel();
         tipo = new JComboBox<>(tipoIntervalo);
         min = new JTextField("");
         max = new JTextField("");
         ag = new AlgoritmoGenetico();
         cPanel.setTarget(ag);
+        panelCruce.setTarget(ag);
+        panelMutacion.setTarget(ag);
+        panelTamPoblacion.setTarget(ag);
+        panelNumGeneraciones.setTarget(ag);
+        panelPrecision.setTarget(ag);
+        panelTipoSeleccion.setTarget(ag);
         mSol = "Mejor solucion: ";
         init();
     }
@@ -52,6 +70,12 @@ public class MainWindow extends JFrame {
         setLayout(new BorderLayout());
         iniPanel();
         cPanel.initialize();
+        panelCruce.initialize();
+        panelMutacion.initialize();
+        panelTamPoblacion.initialize();
+        panelNumGeneraciones.initialize();
+        panelPrecision.initialize();
+        panelTipoSeleccion.initialize();
         JButton ejecBoton = new JButton("Ejecutar");
         ejecBoton.addActionListener(new ActionListener() {
             @Override
@@ -69,6 +93,12 @@ public class MainWindow extends JFrame {
                     }
                 }
                 cPanel.initialize();
+                panelCruce.initialize();
+                panelMutacion.initialize();
+                panelTamPoblacion.initialize();
+                panelNumGeneraciones.initialize();
+                panelPrecision.initialize();
+                panelTipoSeleccion.initialize();
                 cont.run(ag, minimo, maximo, aux);
                 plot.removeAll();
                 plot = new Plot2DPanel();
@@ -105,26 +135,32 @@ public class MainWindow extends JFrame {
 
 
     public void iniPanel(){
-        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
+        panelTamPoblacion.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "Poblacion", "Numero de individuos en la poblacion",
                 "tamPoblacion", 0, Integer.MAX_VALUE));
-        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
+        cPanel.add(panelTamPoblacion);
+        panelNumGeneraciones.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "Numero de generaciones", "Numero de generaciones a ejecutar",
                 "maxGeneraciones", 0, Integer.MAX_VALUE));
-        cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
+        cPanel.add(panelNumGeneraciones);
+        panelCruce.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Probabilidad de cruce", "Probabilidad de que se produzca un cruce entre dos individuos",
                 "probCruce", 0, 1));
-        cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
+        cPanel.add(panelCruce);
+        panelMutacion.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Probabilidad de mutacion", "Probabilidad de que se produzca una mutacion en un individuo",
                 "probMutacion", 0, 1));
-        cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
+        cPanel.add(panelMutacion);
+        panelPrecision.addOption(new DoubleOption<AlgoritmoGenetico>(
                "Precision", "Precision para la discretización del intervalo",
                "precision", 0, 1));
-        cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
+        cPanel.add(panelPrecision);
+        panelTipoSeleccion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de seleccion", "Tipo de seleccion a utilizar",
                 "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
                                                 new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos(),
                                                 new SeleccionRanking()}));
+        cPanel.add(panelTipoSeleccion);
         cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "Tamanyo del torneo", "Tamanyo de torneo de la seleccion por torneo",
                 "tamTorneo", 1, Integer.MAX_VALUE));

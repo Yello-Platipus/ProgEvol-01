@@ -26,7 +26,6 @@ public class CruceUniforme extends Cruce{
                         hijo2.getCromosoma()[k] = padre1.getCromosoma()[k];
                     }
                 }
-
             }
 
             seleccionados.add(hijo1);

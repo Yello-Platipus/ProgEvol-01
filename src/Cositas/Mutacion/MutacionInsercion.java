@@ -23,8 +23,7 @@ public class MutacionInsercion extends Mutacion{
             Object aux = ind.getCromosoma()[pos1];
 
             for (int j = pos1; j < pos2; j++) {
-
-                ind.setCromosoma(j,ind.getCromosoma()[j+1]);
+                ind.setCromosoma(j,ind.getCromosoma()[j + 1]);
             }
             ind.setCromosoma(pos2, aux);
         }

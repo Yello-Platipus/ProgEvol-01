@@ -21,38 +21,39 @@ public class CruceOXOP extends Cruce{
             Individuo hijo1 = padre2.clonar();
             Individuo hijo2 = padre1.clonar();
 
-            ArrayList<Integer> pos1 = new ArrayList<Integer>();
-            for(int j = 0; j < 4; j++){
-                Integer pos2 = -1;
-                int random = (int) (Math.random() * tamCromosoma); // Genero una posicion aleatoria del cromosoma
-                while(pos1.contains(random))
-                    random = (int) (Math.random() * tamCromosoma); // La regenero mientras ya este en la lista
-                pos1.add(random);
-                for(int k = 0; k < tamCromosoma; k++){
-                    if(padre2.getCromosoma()[k] == padre1.getCromosoma()[random]){
-                        pos2 = k;
-                        break;
+            if(Math.random() < probCruce) {
+                ArrayList<Integer> pos1 = new ArrayList<Integer>();
+                for (int j = 0; j < 4; j++) {
+                    Integer pos2 = -1;
+                    int random = (int) (Math.random() * tamCromosoma); // Genero una posicion aleatoria del cromosoma
+                    while (pos1.contains(random))
+                        random = (int) (Math.random() * tamCromosoma); // La regenero mientras ya este en la lista
+                    pos1.add(random);
+                    for (int k = 0; k < tamCromosoma; k++) {
+                        if (padre2.getCromosoma()[k] == padre1.getCromosoma()[random]) {
+                            pos2 = k;
+                            break;
+                        }
                     }
+                    hijo1.setCromosoma(pos2, padre1.getCromosoma()[random]);
                 }
-                hijo1.setCromosoma(pos2, padre1.getCromosoma()[random]);
-            }
 
-            pos1 = new ArrayList<Integer>();
-            for(int j = 0; j < 4; j++){
-                Integer pos2 = -1;
-                int random = (int) (Math.random() * tamCromosoma); // Genero una posicion aleatoria del cromosoma
-                while(pos1.contains(random))
-                    random = (int) (Math.random() * tamCromosoma); // La regenero mientras ya este en la lista
-                pos1.add(random);
-                for(int k = 0; k < tamCromosoma; k++){
-                    if(padre1.getCromosoma()[k] == padre2.getCromosoma()[random]){
-                        pos2 = k;
-                        break;
+                pos1 = new ArrayList<Integer>();
+                for (int j = 0; j < 4; j++) {
+                    Integer pos2 = -1;
+                    int random = (int) (Math.random() * tamCromosoma); // Genero una posicion aleatoria del cromosoma
+                    while (pos1.contains(random))
+                        random = (int) (Math.random() * tamCromosoma); // La regenero mientras ya este en la lista
+                    pos1.add(random);
+                    for (int k = 0; k < tamCromosoma; k++) {
+                        if (padre1.getCromosoma()[k] == padre2.getCromosoma()[random]) {
+                            pos2 = k;
+                            break;
+                        }
                     }
+                    hijo2.setCromosoma(pos2, padre2.getCromosoma()[random]);
                 }
-                hijo2.setCromosoma(pos2, padre2.getCromosoma()[random]);
             }
-
             hijos.add(hijo1);
             hijos.add(hijo2);
         }

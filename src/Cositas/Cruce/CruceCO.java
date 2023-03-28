@@ -16,7 +16,7 @@ public class CruceCO extends Cruce {
         ArrayList<Individuo> cruzados = new ArrayList<Individuo>();
         tamPob = poblacion.size();
         tamCromosoma = poblacion.get(0).getCromosoma().length;
-        for(int k = 0; k < tamPob - 1; k+=2){
+        for(int k = 0; k < tamPob - 1; k += 2){
             Individuo padre1 = poblacion.get(k);
             Individuo padre2 = poblacion.get(k + 1);
             Individuo hijo1 = padre1.clonar();
