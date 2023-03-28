@@ -16,6 +16,7 @@ public class MutacionCombinada extends Mutacion{
     public void mutar(Individuo ind, double probMutacion) {
         if(Math.random() < probMutacion){
             ArrayList<Individuo> lista = new ArrayList<Individuo>();
+            lista.add(ind);
             for(int i = 0; i < 3; i++){
                 Individuo aux = ind.clonar();
                 lista.add(aux);
