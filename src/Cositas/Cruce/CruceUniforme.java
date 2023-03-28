@@ -12,9 +12,9 @@ public class CruceUniforme extends Cruce{
 
     @Override
     public ArrayList<Individuo> cruzar(ArrayList<Individuo> poblacion, double probCruce) {
-        int tamPoblacion = poblacion.size();
-        ArrayList<Individuo> seleccionados = new ArrayList<Individuo>(tamPoblacion);
-        for(int i = 0; i < tamPoblacion-1; i+=2){
+        tamPob = poblacion.size();
+        ArrayList<Individuo> hijos = new ArrayList<Individuo>(tamPob);
+        for(int i = 0; i < tamPob-1; i+=2){
             Individuo padre1 = poblacion.get(i);
             Individuo padre2 = poblacion.get(i+1);
             Individuo hijo1 = padre1.clonar();
@@ -28,10 +28,12 @@ public class CruceUniforme extends Cruce{
                 }
             }
 
-            seleccionados.add(hijo1);
-            seleccionados.add(hijo2);
+            hijos.add(hijo1);
+            hijos.add(hijo2);
 
         }
-        return seleccionados;
+        if(tamPob%2 != 0)
+            hijos.add(poblacion.get(tamPob-1).clonar());
+        return hijos;
     }
 }

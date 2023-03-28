@@ -73,6 +73,8 @@ public class CruceCO extends Cruce {
             cruzados.add(hijo1);
             cruzados.add(hijo2);
         }
+        if(tamPob%2 != 0)
+            cruzados.add(poblacion.get(tamPob-1).clonar());
         return cruzados;
     }
     private void monopunto(int[] cod1, int[] cod2){

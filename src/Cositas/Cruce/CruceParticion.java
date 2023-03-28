@@ -73,6 +73,8 @@ public class CruceParticion extends Cruce{
             cruzados.add(hijo1);
             cruzados.add(hijo2);
         }
+        if(tamPob%2 != 0)
+            cruzados.add(poblacion.get(tamPob-1).clonar());
         return cruzados;
     }
 }

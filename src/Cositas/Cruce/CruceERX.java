@@ -16,10 +16,10 @@ public class CruceERX extends Cruce{
     @Override
     public ArrayList<Individuo> cruzar(ArrayList<Individuo> poblacion, double probCruce) {
         ArrayList<Individuo> hijos = new ArrayList<>();
-        int tamPoblacion = poblacion.size();
-        int tamCromosoma = poblacion.get(0).getCromosoma().length;
+        tamPob = poblacion.size();
+        tamCromosoma = poblacion.get(0).getCromosoma().length;
 
-        for(int i = 0; i < tamPoblacion - 1; i += 2){
+        for(int i = 0; i < tamPob - 1; i += 2){
             boolean roto = false;
             Individuo padre1 = poblacion.get(i);
             Individuo padre2 = poblacion.get(i + 1);
@@ -103,6 +103,8 @@ public class CruceERX extends Cruce{
             hijos.add(hijo1);
             hijos.add(hijo2);
         }
+        if(tamPob%2 != 0)
+            hijos.add(poblacion.get(tamPob-1).clonar());
 
         return hijos;
     }

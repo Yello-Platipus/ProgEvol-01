@@ -13,6 +13,7 @@ public class CruceMonopunto extends Cruce{
     @Override
     public ArrayList<Individuo>  cruzar(ArrayList<Individuo> poblacion, double probCruce) {
         ArrayList cruzados = new ArrayList<Individuo>();
+        tamPob = poblacion.size();
         for(int i = 0; i < poblacion.size() -1; i+=2){
             Individuo padre1, padre2;
             padre1 = poblacion.get(i);
@@ -50,7 +51,9 @@ public class CruceMonopunto extends Cruce{
             cruzados.add(hijo2);
 
         }
-    return cruzados;
+        if(tamPob%2 != 0)
+            cruzados.add(poblacion.get(tamPob-1).clonar());
+        return cruzados;
     }
 
 }

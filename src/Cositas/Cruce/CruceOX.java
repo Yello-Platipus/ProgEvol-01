@@ -13,9 +13,9 @@ public class CruceOX extends Cruce{
     @Override
     public ArrayList<Individuo> cruzar(ArrayList<Individuo> poblacion, double probCruce) {
         ArrayList<Individuo> hijos = new ArrayList<>();
-        int tamPoblacion = poblacion.size();
-        int tamCromosoma = poblacion.get(0).getCromosoma().length;
-        for(int i = 0; i < tamPoblacion-1; i += 2) {
+        tamPob = poblacion.size();
+        tamCromosoma = poblacion.get(0).getCromosoma().length;
+        for(int i = 0; i < tamPob-1; i += 2) {
             int pt1 = (int) (Math.random() * tamCromosoma), pt2 = (int) (Math.random() * tamCromosoma);
             while (pt1 == pt2) // Si los puntos son iguales, regenero el segundo punto
                 pt2 = (int) (Math.random() * tamCromosoma);
@@ -69,6 +69,8 @@ public class CruceOX extends Cruce{
             hijos.add(hijo1);
             hijos.add(hijo2);
         }
+        if(tamPob%2 != 0)
+            hijos.add(poblacion.get(tamPob-1).clonar());
         return hijos;
     }
 }
