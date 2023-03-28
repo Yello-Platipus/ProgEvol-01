@@ -163,7 +163,6 @@ public class Controller {
         ag.mutPob();
         ag.introducirElite();
         ag.evalPob();
-
     }
     private void setGrafica(int i){
         numGen[i] = i;

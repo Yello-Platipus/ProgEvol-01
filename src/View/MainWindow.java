@@ -24,6 +24,12 @@ public class MainWindow extends JFrame {
     private ConfigPanel panelNumGeneraciones;
     private ConfigPanel panelPrecision;
     private ConfigPanel panelTipoSeleccion;
+    private ConfigPanel panelTamTorneo;
+    private ConfigPanel panelD;
+    private ConfigPanel panelTipoFuncion;
+    private ConfigPanel panelTipoCruce;
+    private ConfigPanel panelTipoMutacion;
+    private ConfigPanel panelElite;
     private String[] tipoIntervalo = {"Ninguno", "Porcentaje de mutacion", "Porcentaje de cruce", "Tamano de poblacion"};
     private Plot2DPanel plot;
     private AlgoritmoGenetico ag;
@@ -50,6 +56,12 @@ public class MainWindow extends JFrame {
         panelNumGeneraciones = new ConfigPanel<AlgoritmoGenetico>();
         panelPrecision = new ConfigPanel<AlgoritmoGenetico>();
         panelTipoSeleccion = new ConfigPanel<AlgoritmoGenetico>();
+        panelTamTorneo = new ConfigPanel<AlgoritmoGenetico>();
+        panelD = new ConfigPanel<AlgoritmoGenetico>();
+        panelTipoFuncion = new ConfigPanel<AlgoritmoGenetico>();
+        panelTipoCruce = new ConfigPanel<AlgoritmoGenetico>();
+        panelTipoMutacion = new ConfigPanel<AlgoritmoGenetico>();
+        panelElite = new ConfigPanel<AlgoritmoGenetico>();
         plot = new Plot2DPanel();
         tipo = new JComboBox<>(tipoIntervalo);
         min = new JTextField("");
@@ -62,6 +74,12 @@ public class MainWindow extends JFrame {
         panelNumGeneraciones.setTarget(ag);
         panelPrecision.setTarget(ag);
         panelTipoSeleccion.setTarget(ag);
+        panelTamTorneo.setTarget(ag);
+        panelD.setTarget(ag);
+        panelTipoFuncion.setTarget(ag);
+        panelTipoCruce.setTarget(ag);
+        panelTipoMutacion.setTarget(ag);
+        panelElite.setTarget(ag);
         mSol = "Mejor solucion: ";
         init();
     }
@@ -76,6 +94,12 @@ public class MainWindow extends JFrame {
         panelNumGeneraciones.initialize();
         panelPrecision.initialize();
         panelTipoSeleccion.initialize();
+        panelTamTorneo.initialize();
+        panelD.initialize();
+        panelTipoFuncion.initialize();
+        panelTipoCruce.initialize();
+        panelTipoMutacion.initialize();
+        panelElite.initialize();
         JButton ejecBoton = new JButton("Ejecutar");
         ejecBoton.addActionListener(new ActionListener() {
             @Override
@@ -99,6 +123,12 @@ public class MainWindow extends JFrame {
                 panelNumGeneraciones.initialize();
                 panelPrecision.initialize();
                 panelTipoSeleccion.initialize();
+                panelTamTorneo.initialize();
+                panelD.initialize();
+                panelTipoFuncion.initialize();
+                panelTipoCruce.initialize();
+                panelTipoMutacion.initialize();
+                panelElite.initialize();
                 cont.run(ag, minimo, maximo, aux);
                 plot.removeAll();
                 plot = new Plot2DPanel();
@@ -109,7 +139,7 @@ public class MainWindow extends JFrame {
                 else{
                     iniGraficaInterval();
                     mSol = "La mejor ejecucion ha sido con " + cont.getMejorEjecX() +
-                            " de " + aux.toLowerCase() + " con fitness: " + cont.getMejorAbs()[0];
+                            " de " + aux.toLowerCase() + ", con fitness: " + cont.getMejorAbs()[0];
                 }
                 mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -161,26 +191,32 @@ public class MainWindow extends JFrame {
                                                 new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos(),
                                                 new SeleccionRanking()}));
         cPanel.add(panelTipoSeleccion);
-        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
-                "Tamanyo del torneo", "Tamanyo de torneo de la seleccion por torneo",
+        panelTamTorneo.addOption(new IntegerOption<AlgoritmoGenetico>(
+                "Tamano del torneo", "Tamano de torneo de la seleccion por torneo",
                 "tamTorneo", 1, Integer.MAX_VALUE));
-        cPanel.addOption(new IntegerOption<AlgoritmoGenetico>(
+        cPanel.add(panelTamTorneo);
+        panelD.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "d", "Dimensiones de la funcion 4",
                 "d", 1, Integer.MAX_VALUE));
-        cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
+        cPanel.add(panelD);
+        panelTipoFuncion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de funcion", "Tipo de funcion",
                 "func", new Funcion[]{/*new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b(),*/ new FuncionTSP()}));
-        cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
+        cPanel.add(panelTipoFuncion);
+        panelTipoCruce.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",
                 "cruce", new Cruce[]{/*new CruceMonopunto(), new CruceUniforme(),*/ new CrucePMX(), new CruceOX(), new CruceOXPP(),
                                                 new CruceOXOP(), new CruceCX(), new CruceCO(), new CruceParticion(), new CruceERX()}));
-        cPanel.addOption(new ChoiceOption<AlgoritmoGenetico>(
+        cPanel.add(panelTipoCruce);
+        panelTipoMutacion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
                 "mut", new Mutacion[]{/*new MutacionBasica(),*/ new MutacionInsercion(), new MutacionIntercambio(), new MutacionInversion(),
                                                 new MutacionHeuristica(), new MutacionCombinada()}));
-        cPanel.addOption(new DoubleOption<AlgoritmoGenetico>(
+        cPanel.add(panelTipoMutacion);
+        panelElite.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Proporcion de elite", "Proporcion de la poblacion que se guarda como elite",
                 "elitismo", 0, 1));
+        cPanel.add(panelElite);
 
         cPanel.add(tipo);
         JPanel intervalo = new JPanel(new FlowLayout());
@@ -193,11 +229,29 @@ public class MainWindow extends JFrame {
         tipo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!tipo.getSelectedItem().toString().equals("Ninguno")){
-                    intervalo.setVisible(true);
+                if(tipo.getSelectedItem().toString().equals("Ninguno")){
+                    panelMutacion.setVisible(true);
+                    panelCruce.setVisible(true);
+                    panelTamPoblacion.setVisible(true);
+                    intervalo.setVisible(false);
                 }
                 else{
-                    intervalo.setVisible(false);
+                    if(tipo.getSelectedItem().toString().equals("Porcentaje de mutacion")){
+                        panelMutacion.setVisible(false);
+                        panelCruce.setVisible(true);
+                        panelTamPoblacion.setVisible(true);
+                    }
+                    else if(tipo.getSelectedItem().toString().equals("Porcentaje de cruce")){
+                        panelMutacion.setVisible(true);
+                        panelCruce.setVisible(false);
+                        panelTamPoblacion.setVisible(true);
+                    }
+                    else if(tipo.getSelectedItem().toString().equals("Tamano de poblacion")){
+                        panelMutacion.setVisible(true);
+                        panelCruce.setVisible(true);
+                        panelTamPoblacion.setVisible(false);
+                    }
+                    intervalo.setVisible(true);
                 }
             }
         });
