@@ -24,7 +24,6 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 			this.max[i] = ind.getMax()[i];
 			this.min[i] = ind.getMin()[i];
 		}
-
 	}
 
 	protected int[] getTamGenes() { return tamGenes;

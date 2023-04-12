@@ -200,7 +200,7 @@ public class MainWindow extends JFrame {
         cPanel.add(panelD);
         panelTipoFuncion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de funcion", "Tipo de funcion",
-                "func", new Funcion[]{/*new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b(),*/ new FuncionTSP()}));
+                "func", new Funcion[]{new FuncionArbol()/*new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b(), new FuncionTSP()*/}));
         cPanel.add(panelTipoFuncion);
         panelTipoCruce.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",

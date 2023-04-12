@@ -16,8 +16,14 @@ public class IndividuoArbol extends Individuo<Object>{
 
     public IndividuoArbol(double precision, int d) {
         super(precision, d);
-        arbol = new Tree();
+    }
+
+    public IndividuoArbol(Constructor cons){
+        super(0.001, 2);
+        this.constructor = cons;
+        this.arbol = new Tree();
         constructor.construir(arbol.root, 1);
+
     }
 
     @Override

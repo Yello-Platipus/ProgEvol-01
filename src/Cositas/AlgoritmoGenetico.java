@@ -2,7 +2,7 @@ package Cositas;
 
 import Cositas.Cruce.*;
 import Cositas.Funcion.Funcion;
-import Cositas.Funcion.FuncionTSP;
+import Cositas.Funcion.FuncionArbol;
 import Cositas.Individuo.Constructores.Constructor;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.*;
@@ -49,7 +49,7 @@ public class AlgoritmoGenetico {
 		this.sel = new SeleccionRuleta();
 		this.cruce = new CrucePMX();
 		this.mut = new MutacionIntercambio();
-		this.func = new FuncionTSP();
+		this.func = new FuncionArbol();
 
 	}
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){
@@ -70,7 +70,7 @@ public class AlgoritmoGenetico {
 	public void initPob(){
 		poblacion = new ArrayList<Individuo>();
 		for(int i = 0; i < tamPoblacion; i++) {
-			poblacion.add(func.crearIndividuo(precision,d));
+			poblacion.add(func.crearIndividuo(cons));
 		}
 	}
 	public void selPob(){
