@@ -3,6 +3,7 @@ package Cositas;
 import Cositas.Cruce.*;
 import Cositas.Funcion.Funcion;
 import Cositas.Funcion.FuncionTSP;
+import Cositas.Individuo.Constructores.Constructor;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.*;
 import Cositas.Seleccion.Seleccion;
@@ -34,6 +35,7 @@ public class AlgoritmoGenetico {
 	private Cruce cruce;
 	private Mutacion mut;
 	private Funcion func;
+	private Constructor cons;
 
 	public AlgoritmoGenetico(){
 		this.tamPoblacion = 100;
@@ -210,6 +212,14 @@ public class AlgoritmoGenetico {
 
 	public int getD() {return d;}
 	public void setD(int d){this.d = d;}
+
+	public Constructor getCons() {
+		return cons;
+	}
+
+	public void setCons(Constructor cons) {
+		this.cons = cons;
+	}
 
 	public Boolean esMejor(double a, double b){ // b mejor que a
 		if(func.toString().equalsIgnoreCase("Funcion 1"))

@@ -176,8 +176,7 @@ public class MainWindow extends JFrame {
         panelCruce.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Probabilidad de cruce", "Probabilidad de que se produzca un cruce entre dos individuos",
                 "probCruce", 0, 1));
-        cPanel.add(panelCruce);
-        panelMutacion.addOption(new DoubleOption<AlgoritmoGenetico>(
+        cPanel.add(panelCruce);        panelMutacion.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Probabilidad de mutacion", "Probabilidad de que se produzca una mutacion en un individuo",
                 "probMutacion", 0, 1));
         cPanel.add(panelMutacion);
