@@ -114,6 +114,7 @@ public class IndividuoRS extends Individuo<Object>{
 
     }
 
+    @Override
     public Tree getArbol(){return arbol;}
     @Override
     public int compareTo(Individuo o) {
