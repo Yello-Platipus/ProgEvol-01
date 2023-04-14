@@ -1,16 +1,18 @@
 package Cositas.Individuo.Constructores;
 
+import Util.Tree;
+
 public class ConstructorCompleto extends Constructor{
     @Override
-    public void construir(Node n, int prof) {
+    public void construir(Tree n, int prof) {
         if(prof != maxProf) {
-            n = new Node(funciones[(int) (Math.random() * funciones.length)]);
+            n = new Tree(funciones[(int) (Math.random() * funciones.length)]);
             n.esTerminal = false;
             construir(n.left, prof + 1);
             construir(n.right, prof + 1);
         }
         else{
-            n = new Node(terminales[(int) (Math.random() * terminales.length)]);
+            n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
             n.esTerminal = true;
         }
     }

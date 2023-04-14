@@ -1,20 +1,20 @@
 package Cositas.Individuo.Constructores;
 
-import Util.Node;
+import Util.Tree;
 
 public class ConstructorCreciente extends Constructor {
     @Override
-    public void construir(Node n, int prof) {
+    public void construir(Tree n, int prof) {
         if(prof != maxProf) {
             if(Math.random() < 0.5)
-                n = new Node(funciones[(int) (Math.random() * funciones.length)]);
+                n = new Tree(funciones[(int) (Math.random() * funciones.length)]);
             else
-                n = new Node(terminales[(int) (Math.random() * terminales.length)]);
+                n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
             construir(n.left, prof + 1);
             construir(n.right, prof + 1);
         }
         else{
-            n = new Node(terminales[(int) (Math.random() * terminales.length)]);
+            n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
         }
     }
 

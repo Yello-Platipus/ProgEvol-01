@@ -22,8 +22,8 @@ public class IndividuoRS extends Individuo<Object>{
 
     private Constructor constructor;
     private Tree arbol;
-    private final int minProf = 2;
-    private final int maxProf = 5;
+    private int minProf;
+    private int maxProf;
 
 
 
@@ -31,11 +31,13 @@ public class IndividuoRS extends Individuo<Object>{
         super(precision, d);
     }
 
-    public IndividuoRS(Constructor cons){
+    public IndividuoRS(Constructor cons, int minProf, int maxProf){
         super(0.001, 2);
         this.constructor = cons;
         this.arbol = new Tree();
         constructor.construir(arbol, 1);
+        this.minProf = minProf;
+        this.maxProf = maxProf;
     }
     public IndividuoRS(IndividuoRS ind){
         super(ind.precision, ind.d);

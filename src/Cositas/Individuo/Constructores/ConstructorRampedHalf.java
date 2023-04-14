@@ -1,10 +1,10 @@
 package Cositas.Individuo.Constructores;
 
-import Util.Node;
+import Util.Tree;
 
 public class ConstructorRampedHalf extends Constructor{
     @Override
-    public void construir(Node n, int prof) {
+    public void construir(Tree n, int prof) { // NO EXISTE; ES INUTIL
 
     }
 
