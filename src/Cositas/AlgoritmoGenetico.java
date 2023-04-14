@@ -4,6 +4,9 @@ import Cositas.Cruce.*;
 import Cositas.Funcion.Funcion;
 import Cositas.Funcion.FuncionArbol;
 import Cositas.Individuo.Constructores.Constructor;
+import Cositas.Individuo.Constructores.ConstructorCompleto;
+import Cositas.Individuo.Constructores.ConstructorCreciente;
+import Cositas.Individuo.Constructores.ConstructorRampedHalf;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.*;
 import Cositas.Seleccion.Seleccion;
@@ -36,6 +39,8 @@ public class AlgoritmoGenetico {
 	private Mutacion mut;
 	private Funcion func;
 	private Constructor cons;
+	private static int profMin = 2;
+	private int profMax = 5;
 
 	public AlgoritmoGenetico(){
 		this.tamPoblacion = 100;
@@ -69,8 +74,23 @@ public class AlgoritmoGenetico {
 
 	public void initPob(){
 		poblacion = new ArrayList<Individuo>();
-		for(int i = 0; i < tamPoblacion; i++) {
-			poblacion.add(func.crearIndividuo(cons));
+		if(cons instanceof ConstructorRampedHalf){
+			int nGrupos = profMax - 1;
+			for(int i = 0; i < nGrupos; i++){
+				for(int j = 0; j < tamPoblacion/nGrupos; j++){
+					if(j % 2 == 0)
+						poblacion.add(func.crearIndividuo(new ConstructorCompleto(), profMin, profMax + i));
+					else
+						poblacion.add(func.crearIndividuo(new ConstructorCreciente(), profMin, profMax + i));
+				}
+			}
+			while(poblacion.size() < tamPoblacion)
+				poblacion.add(func.crearIndividuo(new ConstructorCompleto(), profMin, profMax));
+		}
+		else{
+			for(int i = 0; i < tamPoblacion; i++) {
+				poblacion.add(func.crearIndividuo(cons, profMin, profMax));
+			}
 		}
 	}
 	public void selPob(){
@@ -219,6 +239,14 @@ public class AlgoritmoGenetico {
 
 	public void setCons(Constructor cons) {
 		this.cons = cons;
+	}
+
+	public int getProfMax() {
+		return profMax;
+	}
+
+	public void setProfMax(int profMax) {
+		this.profMax = profMax;
 	}
 
 	public Boolean esMejor(double a, double b){ // b mejor que a

@@ -2,11 +2,14 @@ package Cositas.Individuo.Constructores;
 
 import Util.Node;
 
-public class ConstructorCompleto extends Constructor{
+public class ConstructorCreciente extends Constructor {
     @Override
     public void construir(Node n, int prof) {
         if(prof != maxProf) {
-            n = new Node(funciones[(int) (Math.random() * funciones.length)]);
+            if(Math.random() < 0.5)
+                n = new Node(funciones[(int) (Math.random() * funciones.length)]);
+            else
+                n = new Node(terminales[(int) (Math.random() * terminales.length)]);
             construir(n.left, prof + 1);
             construir(n.right, prof + 1);
         }
@@ -17,6 +20,6 @@ public class ConstructorCompleto extends Constructor{
 
     @Override
     public String toString() {
-        return "Inicializacion Completa";
+        return "Inicializacion Creciente";
     }
 }

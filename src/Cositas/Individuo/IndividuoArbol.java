@@ -11,19 +11,20 @@ public class IndividuoArbol extends Individuo<Object>{
 
     private Constructor constructor;
     private Tree arbol;
-    private final int minProf = 2;
-    private final int maxProf = 5;
+    private int minProf;
+    private int maxProf;
 
     public IndividuoArbol(double precision, int d) {
         super(precision, d);
     }
 
-    public IndividuoArbol(Constructor cons){
+    public IndividuoArbol(Constructor cons, int profMin, int profMax){
         super(0.001, 2);
         this.constructor = cons;
         this.arbol = new Tree();
         constructor.construir(arbol.root, 1);
-
+        minProf = profMin;
+        maxProf = profMax;
     }
 
     @Override

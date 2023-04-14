@@ -2,7 +2,7 @@ package Util;
 
 public class Node {
 
-    String value;
+    public String value;
     public Node left;
     public Node right;
 
