@@ -1,7 +1,6 @@
 package Cositas.Individuo;
 
 import Cositas.Individuo.Constructores.Constructor;
-import Util.Node;
 import Util.Tree;
 
 public class IndividuoRS extends Individuo<Object>{
@@ -36,18 +35,18 @@ public class IndividuoRS extends Individuo<Object>{
         super(0.001, 2);
         this.constructor = cons;
         this.arbol = new Tree();
-        constructor.construir(arbol.root, 1);
+        constructor.construir(arbol, 1);
     }
     public IndividuoRS(IndividuoRS ind){
         super(ind.precision, ind.d);
-        this.arbol.root = new Node(ind.getArbol().root);
+        this.arbol = new Tree(ind.getArbol());
     }
     @Override
     public double getFitness() {
         double[] acum = new double[101];
         int cont = 0;
         for(double i = -1; i <= 1.01; i+=0.02){
-            acum[cont++] = calcularValor(arbol.root, i);
+            acum[cont++] = calcularValor(arbol, i);
         }
         double difAcum = 0;
         for(int i = 0; i < cont; i++){
@@ -82,7 +81,7 @@ public class IndividuoRS extends Individuo<Object>{
         return new IndividuoRS(this);
     }
 
-    private double calcularValor(Node n, double x){
+    private double calcularValor(Tree n, double x){
         if(n.esTerminal){
             if(n.value.equals("x"))
                 return x;

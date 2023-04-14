@@ -1,7 +1,5 @@
 package Cositas.Individuo.Constructores;
 
-import Util.Node;
-
 public class ConstructorCompleto extends Constructor{
     @Override
     public void construir(Node n, int prof) {
