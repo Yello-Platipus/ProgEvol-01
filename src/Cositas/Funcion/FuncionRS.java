@@ -2,9 +2,9 @@ package Cositas.Funcion;
 
 import Cositas.Individuo.Constructores.Constructor;
 import Cositas.Individuo.Individuo;
-import Cositas.Individuo.IndividuoArbol;
+import Cositas.Individuo.IndividuoRS;
 
-public class FuncionArbol extends Funcion{
+public class FuncionRS extends Funcion{
 
     @Override
     public Individuo crearIndividuo(Constructor cons, int minProf, int maxProf) {
@@ -13,6 +13,6 @@ public class FuncionArbol extends Funcion{
 
     @Override
     public String toString() {
-        return "Funcion Arbol";
+        return "Funcion Regresion Simbolica";
     }
 }

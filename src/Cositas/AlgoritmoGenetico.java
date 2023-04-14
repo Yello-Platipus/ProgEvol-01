@@ -2,7 +2,7 @@ package Cositas;
 
 import Cositas.Cruce.*;
 import Cositas.Funcion.Funcion;
-import Cositas.Funcion.FuncionArbol;
+import Cositas.Funcion.FuncionRS;
 import Cositas.Individuo.Constructores.Constructor;
 import Cositas.Individuo.Constructores.ConstructorCompleto;
 import Cositas.Individuo.Constructores.ConstructorCreciente;
@@ -54,7 +54,7 @@ public class AlgoritmoGenetico {
 		this.sel = new SeleccionRuleta();
 		this.cruce = new CrucePMX();
 		this.mut = new MutacionIntercambio();
-		this.func = new FuncionArbol();
+		this.func = new FuncionRS();
 
 	}
 	public AlgoritmoGenetico(int tamPoblacion, int maxGeneraciones, double probCruce, double probMutacion, double precision){
