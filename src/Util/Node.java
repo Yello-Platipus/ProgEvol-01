@@ -2,7 +2,9 @@ package Util;
 
 public class Node {
 
-    String value;
+    public String value;
+
+    public boolean esTerminal;
     public Node left;
     public Node right;
 
@@ -10,5 +12,11 @@ public class Node {
         this.value = value;
         right = null;
         left = null;
+    }
+
+    public Node(Node n){
+        this.value = value;
+        this.right = new Node(n.right);
+        this.left = new Node(n.left);
     }
 }

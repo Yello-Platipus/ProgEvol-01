@@ -1,5 +1,7 @@
 package Cositas.Individuo;
 
+import Util.Tree;
+
 import java.util.Random;
 
 public abstract class Individuo<T> implements Comparable<Individuo>{
@@ -72,4 +74,6 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	public abstract T nextRandom();
 
 	public abstract Individuo clonar();
+
+
 }

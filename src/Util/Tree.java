@@ -1,6 +1,6 @@
 package Util;
 
-public class Tree {
+public class Tree implements Cloneable{
 
     public Node root;
 
