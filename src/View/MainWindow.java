@@ -180,10 +180,6 @@ public class MainWindow extends JFrame {
                 "Probabilidad de mutacion", "Probabilidad de que se produzca una mutacion en un individuo",
                 "probMutacion", 0, 1));
         cPanel.add(panelMutacion);
-        panelPrecision.addOption(new DoubleOption<AlgoritmoGenetico>(
-               "Precision", "Precision para la discretización del intervalo",
-               "precision", 0, 1));
-        cPanel.add(panelPrecision);
         panelTipoSeleccion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de seleccion", "Tipo de seleccion a utilizar",
                 "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
@@ -194,23 +190,13 @@ public class MainWindow extends JFrame {
                 "Tamano del torneo", "Tamano de torneo de la seleccion por torneo",
                 "tamTorneo", 1, Integer.MAX_VALUE));
         cPanel.add(panelTamTorneo);
-        panelD.addOption(new IntegerOption<AlgoritmoGenetico>(
-                "d", "Dimensiones de la funcion 4",
-                "d", 1, Integer.MAX_VALUE));
-        cPanel.add(panelD);
-        panelTipoFuncion.addOption(new ChoiceOption<AlgoritmoGenetico>(
-                "Tipo de funcion", "Tipo de funcion",
-                "func", new Funcion[]{new FuncionRS()/*new Funcion1(), new Funcion2(), new Funcion3(),new Funcion4a(), new Funcion4b(), new FuncionTSP()*/}));
-        cPanel.add(panelTipoFuncion);
         panelTipoCruce.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",
-                "cruce", new Cruce[]{/*new CruceMonopunto(), new CruceUniforme(),*/ new CrucePMX(), new CruceOX(), new CruceOXPP(),
-                                                new CruceOXOP(), new CruceCX(), new CruceCO(), new CruceParticion(), new CruceERX()}));
+                "cruce", new Cruce[]{new CruceArbol()}));
         cPanel.add(panelTipoCruce);
         panelTipoMutacion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de mutacion", "Tipo de mutacion",
-                "mut", new Mutacion[]{/*new MutacionBasica(),*/ new MutacionInsercion(), new MutacionIntercambio(), new MutacionInversion(),
-                                                new MutacionHeuristica(), new MutacionCombinada()}));
+                "mut", new Mutacion[]{new MutacionFuncional(), new MutacionArbolSubarbol(), new MutacionTerminal()}));
         cPanel.add(panelTipoMutacion);
         panelElite.addOption(new DoubleOption<AlgoritmoGenetico>(
                 "Proporcion de elite", "Proporcion de la poblacion que se guarda como elite",

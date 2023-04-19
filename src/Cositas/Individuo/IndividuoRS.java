@@ -28,12 +28,7 @@ public class IndividuoRS extends Individuo<Object>{
     private double[] calculado;
 
 
-    public IndividuoRS(double precision, int d) {
-        super(precision, d);
-    }
-
     public IndividuoRS(Constructor cons, int minProf, int maxProf){
-        super(0.001, 2);
         this.constructor = cons;
         this.arbol = new Tree();
         constructor.construir(arbol, 1);
@@ -41,7 +36,6 @@ public class IndividuoRS extends Individuo<Object>{
         this.maxProf = maxProf;
     }
     public IndividuoRS(IndividuoRS ind){
-        super(ind.precision, ind.d);
         this.arbol = new Tree(ind.getArbol());
     }
     @Override
@@ -59,12 +53,6 @@ public class IndividuoRS extends Individuo<Object>{
         return Math.sqrt(difAcum);
     }
 
-    @Override
-    public int tamGen(double min, double max) {
-        return 0;
-    }
-
-    @Override
     public double getFenotipo(int x) {
         return 0;
     }
