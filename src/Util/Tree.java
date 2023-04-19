@@ -6,10 +6,16 @@ public class Tree{
     public boolean esTerminal;
     public Tree left;
     public Tree right;
-    public Tree(String value) {
-        this.value = value;
+
+    public Tree(){
+        value = "";
         right = null;
         left = null;
+    }
+    public Tree(String value) {
+        this.value = value;
+        right = new Tree();
+        left = new Tree();
     }
 
     public Tree(Tree n){
@@ -21,12 +27,14 @@ public class Tree{
         }
     }
 
-    public Tree() {
-    }
-
     public int getSize(){
         if (esTerminal)
             return 1;
         return 1 + left.getSize() + right.getSize();
+    }
+    public int getProf(){
+        if(esTerminal)
+            return 1;
+        return 1 + Math.max(left.getProf(), right.getProf());
     }
 }

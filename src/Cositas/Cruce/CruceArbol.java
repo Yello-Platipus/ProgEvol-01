@@ -42,6 +42,7 @@ public class CruceArbol extends Cruce{
                         pila1.push(aux.left);
                         pila1.push(aux.right);
                     }
+                    cont1++;
                 } while(cont2 < random2){
                     Tree aux = pila2.peek();
                     pila2.pop();
@@ -49,6 +50,7 @@ public class CruceArbol extends Cruce{
                         pila2.push(aux.left);
                         pila2.push(aux.right);
                     }
+                    cont2++;
                 }
                 Tree uno = pila1.peek();
                 Tree dos = pila2.peek();

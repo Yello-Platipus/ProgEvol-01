@@ -68,7 +68,7 @@ public class IndividuoRS extends Individuo<Object>{
     }
 
     @Override
-    public Individuo clonar() { // TODO
+    public Individuo clonar() {
         return new IndividuoRS(this);
     }
 
