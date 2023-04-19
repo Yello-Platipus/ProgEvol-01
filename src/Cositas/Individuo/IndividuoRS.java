@@ -24,7 +24,6 @@ public class IndividuoRS extends Individuo<Object>{
     private Tree arbol;
     private int minProf;
     private int maxProf;
-
     private double[] calculado;
 
 
@@ -87,7 +86,6 @@ public class IndividuoRS extends Individuo<Object>{
         }
         else{
             double izq = 0, der = 0;
-
             izq = calcularValor(n.left, x);
             der = calcularValor(n.right, x);
 
@@ -101,6 +99,7 @@ public class IndividuoRS extends Individuo<Object>{
                     break;
                 case "mul":
                     res = izq * der;
+                    break;
                 default:
                     res = 0;
             }
