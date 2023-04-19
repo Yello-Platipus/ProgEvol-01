@@ -22,15 +22,13 @@ public class CruceArbol extends Cruce{
             Individuo hijo1 = padre1.clonar();
             Individuo hijo2 = padre2.clonar();
             if(Math.random() < probCruce){
-
-
                 int random1 = (int)(hijo1.getArbol().getSize() * Math.random());
                 int random2 = (int)(hijo2.getArbol().getSize() * Math.random());
 
                 Stack<Tree> pila1 = new Stack<>();
                 Stack<Tree> pila2 = new Stack<>();
                 pila1.push(padre1.getArbol());
-                pila2.push(padre1.getArbol());
+                pila2.push(padre2.getArbol());
                 //Posiblemente no funcione
                 int cont1 = 0;
                 int cont2 = 0;
