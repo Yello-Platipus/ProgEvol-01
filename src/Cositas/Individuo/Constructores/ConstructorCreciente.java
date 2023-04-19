@@ -11,11 +11,14 @@ public class ConstructorCreciente extends Constructor {
                 construir(n.left, prof + 1);
                 construir(n.right, prof + 1);
             }
-            else
+            else {
                 n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
+                n.esTerminal = true;
+            }
         }
         else{
             n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
+            n.esTerminal = true;
         }
     }
 
