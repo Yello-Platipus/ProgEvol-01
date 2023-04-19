@@ -2,6 +2,10 @@ package View;
 
 import Controller.Controller;
 import Cositas.AlgoritmoGenetico;
+import Cositas.Individuo.Constructores.Constructor;
+import Cositas.Individuo.Constructores.ConstructorCompleto;
+import Cositas.Individuo.Constructores.ConstructorCreciente;
+import Cositas.Individuo.Constructores.ConstructorRampedHalf;
 import Cositas.Mutacion.*;
 import Cositas.Seleccion.*;
 import Cositas.Funcion.*;
@@ -26,6 +30,7 @@ public class MainWindow extends JFrame {
     private ConfigPanel panelTipoSeleccion;
     private ConfigPanel panelTamTorneo;
     private ConfigPanel panelD;
+    private ConfigPanel panelTipoConstructor;
     private ConfigPanel panelTipoFuncion;
     private ConfigPanel panelTipoCruce;
     private ConfigPanel panelTipoMutacion;
@@ -58,6 +63,7 @@ public class MainWindow extends JFrame {
         panelTipoSeleccion = new ConfigPanel<AlgoritmoGenetico>();
         panelTamTorneo = new ConfigPanel<AlgoritmoGenetico>();
         panelD = new ConfigPanel<AlgoritmoGenetico>();
+        panelTipoConstructor = new ConfigPanel<AlgoritmoGenetico>();
         panelTipoFuncion = new ConfigPanel<AlgoritmoGenetico>();
         panelTipoCruce = new ConfigPanel<AlgoritmoGenetico>();
         panelTipoMutacion = new ConfigPanel<AlgoritmoGenetico>();
@@ -76,6 +82,7 @@ public class MainWindow extends JFrame {
         panelTipoSeleccion.setTarget(ag);
         panelTamTorneo.setTarget(ag);
         panelD.setTarget(ag);
+        panelTipoConstructor.setTarget(ag);
         panelTipoFuncion.setTarget(ag);
         panelTipoCruce.setTarget(ag);
         panelTipoMutacion.setTarget(ag);
@@ -96,6 +103,7 @@ public class MainWindow extends JFrame {
         panelTipoSeleccion.initialize();
         panelTamTorneo.initialize();
         panelD.initialize();
+        panelTipoConstructor.initialize();
         panelTipoFuncion.initialize();
         panelTipoCruce.initialize();
         panelTipoMutacion.initialize();
@@ -125,6 +133,7 @@ public class MainWindow extends JFrame {
                 panelTipoSeleccion.initialize();
                 panelTamTorneo.initialize();
                 panelD.initialize();
+                panelTipoConstructor.initialize();
                 panelTipoFuncion.initialize();
                 panelTipoCruce.initialize();
                 panelTipoMutacion.initialize();
@@ -190,6 +199,11 @@ public class MainWindow extends JFrame {
                 "Tamano del torneo", "Tamano de torneo de la seleccion por torneo",
                 "tamTorneo", 1, Integer.MAX_VALUE));
         cPanel.add(panelTamTorneo);
+        panelTipoConstructor.addOption(new ChoiceOption<AlgoritmoGenetico>(
+                "Tipo de constructor", "Tipo de constructor a utilizar",
+                "cons", new Constructor[]{new ConstructorCompleto(), new ConstructorRampedHalf(),
+                                                new ConstructorCreciente()}));
+        cPanel.add(panelTipoConstructor);
         panelTipoCruce.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de cruce", "Tipo de cruce",
                 "cruce", new Cruce[]{new CruceArbol()}));
