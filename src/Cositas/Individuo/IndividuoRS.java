@@ -38,6 +38,12 @@ public class IndividuoRS extends Individuo<Object>{
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
     }
+
+    @Override
+    public String toString() {
+        return arbol.toString();
+    }
+
     @Override
     public double getFitness() {
         double[] calculado = new double[101];

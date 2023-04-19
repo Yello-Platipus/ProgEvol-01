@@ -37,4 +37,19 @@ public class Tree{
             return 1;
         return 1 + Math.max(left.getProf(), right.getProf());
     }
+
+    public String toString(){
+        if(esTerminal)
+            return value;
+        switch (value){
+            case "add":
+                return "(" + left.toString() + " + " + right.toString() + ")";
+            case "sub":
+                return "(" + left.toString() + " - " + right.toString() + ")";
+            case "mul":
+                return "(" + left.toString() + " * " + right.toString() + ")";
+            default:
+                return "Error";
+        }
+    }
 }

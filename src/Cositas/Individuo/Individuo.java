@@ -10,8 +10,9 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	protected int d;
 
 	public Individuo() {
-
 	}
+
+	public abstract String toString();
 
 	public abstract double getFitness();
 
