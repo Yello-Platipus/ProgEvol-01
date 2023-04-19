@@ -13,9 +13,12 @@ public class Tree{
     }
 
     public Tree(Tree n){
-        this.value = value;
-        this.right = new Tree(n.right);
-        this.left = new Tree(n.left);
+        this.value = n.value;
+        this.esTerminal = n.esTerminal;
+        if(!n.esTerminal) {
+            this.right = new Tree(n.right);
+            this.left = new Tree(n.left);
+        }
     }
 
     public Tree() {
