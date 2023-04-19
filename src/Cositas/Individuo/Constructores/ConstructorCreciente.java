@@ -6,12 +6,13 @@ public class ConstructorCreciente extends Constructor {
     @Override
     public void construir(Tree n, int prof) {
         if(prof != maxProf) {
-            if(Math.random() < 0.5)
+            if(Math.random() < 0.5) {
                 n = new Tree(funciones[(int) (Math.random() * funciones.length)]);
+                construir(n.left, prof + 1);
+                construir(n.right, prof + 1);
+            }
             else
                 n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
-            construir(n.left, prof + 1);
-            construir(n.right, prof + 1);
         }
         else{
             n = new Tree(terminales[(int) (Math.random() * terminales.length)]);
