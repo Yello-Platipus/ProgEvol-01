@@ -25,6 +25,7 @@ public class IndividuoRS extends Individuo<Object>{
     private int minProf;
     private int maxProf;
 
+    private double[] calculado;
 
 
     public IndividuoRS(double precision, int d) {
@@ -45,14 +46,14 @@ public class IndividuoRS extends Individuo<Object>{
     }
     @Override
     public double getFitness() {
-        double[] acum = new double[101];
+        double[] calculado = new double[101];
         int cont = 0;
         for(double i = -1; i <= 1.01; i+=0.02){
-            acum[cont++] = calcularValor(arbol, i);
+            calculado[cont++] = calcularValor(arbol, i);
         }
         double difAcum = 0;
         for(int i = 0; i < cont; i++){
-            difAcum = Math.pow(REAL[i] - acum[i],2);
+            difAcum = Math.pow(REAL[i] - calculado[i],2);
         }
 
         return Math.sqrt(difAcum);
@@ -116,6 +117,8 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public Tree getArbol(){return arbol;}
+
+    public double[] getCalculado(){return calculado;}
     @Override
     public int compareTo(Individuo o) {
         if(this.getFitness() > o.getFitness())

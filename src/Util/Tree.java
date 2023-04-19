@@ -3,11 +3,9 @@ package Util;
 public class Tree{
 
     public String value;
-
     public boolean esTerminal;
     public Tree left;
     public Tree right;
-
     public Tree(String value) {
         this.value = value;
         right = null;
@@ -21,6 +19,11 @@ public class Tree{
     }
 
     public Tree() {
+    }
 
+    public int getSize(){
+        if (esTerminal)
+            return 1;
+        return 1 + left.getSize() + right.getSize();
     }
 }
