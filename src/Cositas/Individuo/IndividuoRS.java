@@ -40,7 +40,9 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public String toString() {
-        return arbol.toString();
+
+        //return arbol.toString();
+        return getFitness() + " ";
     }
 
     @Override
@@ -52,7 +54,7 @@ public class IndividuoRS extends Individuo<Object>{
         }
         double difAcum = 0;
         for(int i = 0; i < cont; i++){
-            difAcum = Math.pow(REAL[i] - calculado[i],2);
+            difAcum += Math.pow(REAL[i] - calculado[i],2);
         }
 
         return Math.sqrt(difAcum);
@@ -62,8 +64,7 @@ public class IndividuoRS extends Individuo<Object>{
         return 0;
     }
 
-    @Override
-    public void setCromosoma(int i, Object o) {
+    public void setArbol(Tree antiguo, Tree nuevo) {
 
     }
 

@@ -26,6 +26,25 @@ public class Tree{
             this.left = new Tree(n.left);
         }
     }
+    public void setTree(Tree nuevo){        //Cambiar un subarbol por otro
+        this.value = nuevo.value;
+        this.esTerminal = nuevo.esTerminal;
+
+        if(this.right != null && nuevo.right != null)
+            this.right.setTree(nuevo.right);
+        else if(nuevo.right != null)
+            this.right = new Tree(nuevo.right);
+        else
+            this.right = null;
+
+        if(this.left != null && nuevo.left != null)
+            this.left.setTree(nuevo.left);
+        else if(nuevo.left != null)
+            this.left = new Tree(nuevo.left);
+        else
+            this.left = null;
+
+    }
 
     public int getSize(){
         if (esTerminal)

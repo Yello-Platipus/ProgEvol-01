@@ -27,7 +27,7 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	}
 
 
-	public abstract void setCromosoma(int i, T o);
+	public abstract void setArbol(Tree antiguo, Tree nuevo);
 
 	public abstract T nextRandom();
 

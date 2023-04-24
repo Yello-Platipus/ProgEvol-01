@@ -4,7 +4,9 @@ import Cositas.Individuo.Individuo;
 import Util.Tree;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 public class CruceArbol extends Cruce{
     @Override
@@ -25,40 +27,44 @@ public class CruceArbol extends Cruce{
                 int random1 = (int)(hijo1.getArbol().getSize() * Math.random());
                 int random2 = (int)(hijo2.getArbol().getSize() * Math.random());
 
-                Stack<Tree> pila1 = new Stack<>();
-                Stack<Tree> pila2 = new Stack<>();
-                pila1.push(padre1.getArbol());
-                pila2.push(padre2.getArbol());
+                Queue<Tree> cola1 = new LinkedList<Tree>();
+                Queue<Tree> cola2 = new LinkedList<Tree>();
+                cola1.add(hijo1.getArbol());
+                cola2.add(hijo2.getArbol());
                 //Posiblemente no funcione
                 int cont1 = 0;
                 int cont2 = 0;
 
                 while(cont1 < random1){
-                    Tree aux = pila1.peek();
-                    pila1.pop();
+                    Tree aux = cola1.peek();
+                    cola1.remove();
                     if(!aux.esTerminal){
-                        pila1.push(aux.left);
-                        pila1.push(aux.right);
+                        cola1.add(aux.left);
+                        cola1.add(aux.right);
                     }
                     cont1++;
                 } while(cont2 < random2){
-                    Tree aux = pila2.peek();
-                    pila2.pop();
+                    Tree aux = cola2.peek();
+                    cola2.remove();
                     if(!aux.esTerminal){
-                        pila2.push(aux.left);
-                        pila2.push(aux.right);
+                        cola2.add(aux.left);
+                        cola2.add(aux.right);
                     }
                     cont2++;
                 }
-                Tree uno = pila1.peek();
-                Tree dos = pila2.peek();
+
+                Tree uno = cola1.peek();
+                Tree dos = cola2.peek();
                 Tree aux = new Tree(uno);
-                uno = new Tree(dos);
-                dos = new Tree(aux);
+                uno.setTree(dos);
+                dos.setTree(aux);
+
             }
             cruzados.add(hijo1);
             cruzados.add(hijo2);
         }
+        if(tamPob % 2 == 1)
+            cruzados.add(poblacion.get(tamPob - 1).clonar());
         return cruzados;
     }
 }
