@@ -15,18 +15,18 @@ public class Controller {
     private double fitnessEjec[];
     private int maxGen;
     String mejorInd;
-    private int min, max;
-    private int cont;
+    private double min, max;
+    private double cont;
 
     private double mejorEjec;
-    private int mejorEjecX;
+    private double mejorEjecX;
     private ArrayList<Individuo> original;
     private double[] numInterval;
 
     public Controller(){
     }
 
-    public void run(AlgoritmoGenetico ag, int min, int max, String tipo) {
+    public void run(AlgoritmoGenetico ag, double min, double max, String tipo) {
         this.ag = ag;
         this.min = min;
         this.max = max;
@@ -60,7 +60,7 @@ public class Controller {
     private void runIntervaloMut(){
         iniArraysIntervalos();
         int fCont =0;
-        for(int i = min; i <= max; i+=cont){
+        for(double i = min; i <= max; i += cont){
             ag.setProbMutacion((double)i/100);
             ag.setPoblacion((ArrayList<Individuo>) original.clone());
             mejorEjec = ag.getMejorFitness();
@@ -81,7 +81,7 @@ public class Controller {
     private void runIntervaloCruce(){
         iniArraysIntervalos();
         int fCont = 0;
-        for(int i = min; i <= max; i+=cont){
+        for(double i = min; i <= max; i+=cont){
             ag.setProbCruce((double)i/100);
             ag.setPoblacion((ArrayList<Individuo>) original.clone());
             mejorEjec = ag.getMejorFitness();
@@ -104,8 +104,8 @@ public class Controller {
     private void runIntervaloPob(){
         iniArraysIntervalos();
         int fCont = 0;
-        for(int i = min; i <= max; i+=cont){
-            ag.setTamPoblacion(i);
+        for(double i = min; i <= max; i+=cont){
+            ag.setTamPoblacion((int) i);
             ag.initPob();
             ag.evalPob();
             mejorEjec = ag.getMejorFitness();
@@ -152,9 +152,8 @@ public class Controller {
     }
 
     private void iniArraysIntervalos(){
-        
-        fitnessEjec = new double[1+(max-min)/cont];
-        numInterval = new double[1+(max-min)/cont];
+        fitnessEjec = new double[(int) (1+(max-min)/cont)];
+        numInterval = new double[(int) (1+(max-min)/cont)];
     }
     private void iteracion(){
         ag.generarElite();
@@ -191,7 +190,7 @@ public class Controller {
 
     public double[] getNumInterval(){return numInterval;}
 
-    public int getMejorEjecX(){return mejorEjecX;}
+    public double getMejorEjecX(){return mejorEjecX;}
 
     public double getMejorEjec(){return mejorEjec;}
 }

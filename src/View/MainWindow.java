@@ -112,13 +112,13 @@ public class MainWindow extends JFrame {
         ejecBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int minimo = 0;
-                int maximo = 0;
+                double minimo = 0;
+                double maximo = 0;
                 String aux = tipo.getSelectedItem().toString();
                 if(!aux.equalsIgnoreCase("Ninguno")) {
                     try {
-                        minimo = Integer.parseInt(min.getText());
-                        maximo = Integer.parseInt(max.getText());
+                        minimo = Double.parseDouble(min.getText());
+                        maximo = Double.parseDouble(max.getText());
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(null, "Introduce valores numericos en los campos de intervalo");
                         return;
