@@ -30,7 +30,7 @@ public class Controller {
         this.ag = ag;
         this.min = min;
         this.max = max;
-        cont = (max - min)/10;
+        cont = (max - min)/4;
         maxGen = ag.getMaxGeneraciones();
         
         ag.initPob();
@@ -61,7 +61,7 @@ public class Controller {
         iniArraysIntervalos();
         int fCont =0;
         for(double i = min; i <= max; i += cont){
-            ag.setProbMutacion((double)i/100);
+            ag.setProbMutacion(i/100);
             ag.setPoblacion((ArrayList<Individuo>) original.clone());
             mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){
@@ -82,7 +82,7 @@ public class Controller {
         iniArraysIntervalos();
         int fCont = 0;
         for(double i = min; i <= max; i+=cont){
-            ag.setProbCruce((double)i/100);
+            ag.setProbCruce(i/100);
             ag.setPoblacion((ArrayList<Individuo>) original.clone());
             mejorEjec = ag.getMejorFitness();
             for(int g = 0; g < maxGen; g++){

@@ -98,7 +98,6 @@ public class AlgoritmoGenetico {
 	}
 	public void cruzPob(){
 		poblacion = cruce.cruzar(poblacion, probCruce);
-
 	}
 	public void mutPob(){
 		for(int i = 0; i < tamPoblacion; i++){
