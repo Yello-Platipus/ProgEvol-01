@@ -13,7 +13,6 @@ import static Cositas.Individuo.IndividuoRS.REAL;
 
 public class Main {
     public static void main(String[] args) {
-
         Controller c = new Controller();
         SwingUtilities.invokeLater(new Runnable() {
             @Override

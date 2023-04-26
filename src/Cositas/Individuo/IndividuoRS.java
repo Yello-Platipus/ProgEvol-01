@@ -33,8 +33,6 @@ public class IndividuoRS extends Individuo<Object>{
         constructor.construir(arbol, 1);
         this.minProf = minProf;
         this.maxProf = maxProf;
-        arbol.updateSize();
-        arbol.updateDepth();
     }
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
@@ -47,7 +45,7 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public double getFitness() {
-        double[] calculado = new double[101];
+        calculado = new double[101];
         int cont = 0;
         for(double i = -1; i <= 1.01; i+=0.02){
             calculado[cont++] = calcularValor(arbol, i);
@@ -112,7 +110,10 @@ public class IndividuoRS extends Individuo<Object>{
     @Override
     public Tree getArbol(){return arbol;}
 
-    public double[] getCalculado(){return calculado;}
+    @Override
+    public double[] getGraf() {
+        return calculado;
+    }
     @Override
     public int compareTo(Individuo o) {
         if(this.getFitness() > o.getFitness())

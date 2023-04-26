@@ -14,7 +14,7 @@ public class Controller {
 
     private double fitnessEjec[];
     private int maxGen;
-    String mejorInd;
+    private String mejorInd;
     private double min, max;
     private double cont;
 
@@ -22,6 +22,8 @@ public class Controller {
     private double mejorEjecX;
     private ArrayList<Individuo> original;
     private double[] numInterval;
+
+    private double[] mejorGraf;
 
     public Controller(){
     }
@@ -39,6 +41,7 @@ public class Controller {
         mejorAbs = new double[1];
         mejorAbs[0] = ag.getMejorFitness();
         mejorEjecX = 0;
+
         original = (ArrayList<Individuo>) ag.getPoblacion().clone();
 
         switch(tipo){
@@ -132,6 +135,7 @@ public class Controller {
         mejorGen[0] = ag.getMejorFitness();
         mejorAbs[0] = mejorGen[0];
         mejorInd = ag.getMejorIndividuo().toString();
+        mejorGraf = ag.getMejorIndividuo().getGraf();
 
         while(i <= maxGen) {
             iteracion();
@@ -145,6 +149,7 @@ public class Controller {
         mejorGen = new double[maxGen+1];
         mejorAbs = new double[maxGen+1];
         mediaGen = new double[maxGen+1];
+        mejorGraf = new double[101];
     }
 
     public double[] getFitnessEjec() {
@@ -171,6 +176,7 @@ public class Controller {
         if(ag.esMejor(mejorAbs[i-1], mejorGen[i])){
             mejorAbs[i] = mejorGen[i];
             mejorInd = ag.getMejorIndividuo().toString();
+            mejorGraf = ag.getMejorIndividuo().getGraf();
         }
         else{
             mejorAbs[i] = mejorAbs[i-1];
@@ -191,6 +197,8 @@ public class Controller {
     public double[] getNumInterval(){return numInterval;}
 
     public double getMejorEjecX(){return mejorEjecX;}
+
+    public double[] getMejorGraf(){return mejorGraf;}
 
     public double getMejorEjec(){return mejorEjec;}
 }

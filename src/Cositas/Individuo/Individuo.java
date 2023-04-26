@@ -34,4 +34,6 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	public abstract Individuo clonar();
 
 	public abstract Tree getArbol();
+
+	public abstract double[] getGraf();
 }
