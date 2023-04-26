@@ -30,7 +30,10 @@ public class MutacionArbolSubarbol extends Mutacion{
                 t = t.right;
             prof++;
         }
-        if(Math.random() < probMutacion)
+        if(Math.random() < probMutacion) {
             new ConstructorCreciente().construir(t, prof);
+            t.updateSize();
+            t.updateDepth();
+        }
     }
 }

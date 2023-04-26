@@ -16,6 +16,8 @@ public class MutacionFuncional extends Mutacion{
         while(!t.esTerminal){
             if(Math.random() < probMutacion){
                 t = new Tree(Constructor.funciones[(int) (Math.random() * Constructor.funciones.length)]);
+                t.updateDepth();
+                t.updateSize();
                 break;
             }
             if(Math.random() < 0.5)

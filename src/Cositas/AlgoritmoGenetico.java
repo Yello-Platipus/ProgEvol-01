@@ -27,6 +27,7 @@ public class AlgoritmoGenetico {
 	private int d;
 	private int tamTorneo;
 	private Individuo elMejor;
+	private static boolean bloating;
 
 	private double elitismo;
 	private int numElite = 0;
@@ -253,4 +254,8 @@ public class AlgoritmoGenetico {
 			return a < b;
 		else return a > b;
 	}
+
+	public boolean getBloating(){return bloating;}
+
+	public void setBloating(boolean bloating){this.bloating = bloating;}
 }

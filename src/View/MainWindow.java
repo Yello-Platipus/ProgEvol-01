@@ -41,7 +41,8 @@ public class MainWindow extends JFrame {
     private JLabel mejorSol;
     private JComboBox<String> tipo;
     private JTextField min, max;
-    String mSol;
+    private String mSol;
+    private JCheckBox bloating;
     private double[] numGen;
     private double[] mejorGen;
     private double[] mejorAbs;
@@ -138,6 +139,7 @@ public class MainWindow extends JFrame {
                 panelTipoCruce.initialize();
                 panelTipoMutacion.initialize();
                 panelElite.initialize();
+                ag.setBloating(bloating.isSelected());
                 cont.run(ag, minimo, maximo, aux);
                 plot.removeAll();
                 plot = new Plot2DPanel();
@@ -254,6 +256,10 @@ public class MainWindow extends JFrame {
                 }
             }
         });
+
+        bloating = new JCheckBox("Bloating", false);
+        cPanel.add(bloating);
+
         cPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         cPanel.setLayout(new BoxLayout(cPanel, BoxLayout.PAGE_AXIS));
         this.add(cPanel, BorderLayout.WEST);

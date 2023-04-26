@@ -56,9 +56,13 @@ public class CruceArbol extends Cruce{
                 Tree uno = cola1.peek();
                 Tree dos = cola2.peek();
                 Tree aux = new Tree(uno);
+                uno.updateDepth();
+                uno.updateSize();
+                dos.updateDepth();
+                dos.updateSize();
+
                 uno.setTree(dos);
                 dos.setTree(aux);
-
             }
             cruzados.add(hijo1);
             cruzados.add(hijo2);
