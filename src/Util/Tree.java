@@ -28,7 +28,7 @@ public class Tree{
             this.left = new Tree(n.left);
         }
     }
-    public void setTree(Tree nuevo){        //Cambiar un subarbol por otro
+    public void setTree(Tree nuevo){ // Cambiar un subarbol por otro
         this.value = nuevo.value;
         this.esTerminal = nuevo.esTerminal;
 
@@ -88,5 +88,12 @@ public class Tree{
 
     public int getProf(){
         return depth;
+    }
+
+    public void iniTerminal(String value){
+        this.value = value;
+        this.esTerminal = true;
+        this.left = new Tree();
+        this.right = new Tree();
     }
 }
