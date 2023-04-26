@@ -40,8 +40,6 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public String toString() {
-
-        //return arbol.toString();
         return getFitness() + " ";
     }
 
