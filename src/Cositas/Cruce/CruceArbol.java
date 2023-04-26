@@ -24,8 +24,8 @@ public class CruceArbol extends Cruce{
             Individuo hijo1 = padre1.clonar();
             Individuo hijo2 = padre2.clonar();
             if(Math.random() < probCruce){
-                int random1 = 1+(int)(hijo1.getArbol().getSize()-1 * Math.random());
-                int random2 = 1+(int)(hijo2.getArbol().getSize()-1 * Math.random());
+                int random1 = 1+(int)((hijo1.getArbol().getSize()-1) * Math.random());
+                int random2 = 1+(int)((hijo2.getArbol().getSize()-1) * Math.random());
 
                 Queue<Tree> cola1 = new LinkedList<Tree>();
                 Queue<Tree> cola2 = new LinkedList<Tree>();
@@ -57,10 +57,6 @@ public class CruceArbol extends Cruce{
                 Tree uno = cola1.peek();
                 Tree dos = cola2.peek();
                 Tree aux = new Tree(uno);
-                uno.updateDepth();
-                uno.updateSize();
-                dos.updateDepth();
-                dos.updateSize();
 
                 uno.setTree(dos);
                 dos.setTree(aux);

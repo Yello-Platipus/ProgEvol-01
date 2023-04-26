@@ -6,8 +6,6 @@ public class Tree{
     public boolean esTerminal;
     public Tree left;
     public Tree right;
-    private int size;
-    private int depth;
 
     public Tree(){
         value = "";
@@ -28,7 +26,7 @@ public class Tree{
             this.left = new Tree(n.left);
         }
     }
-    public void setTree(Tree nuevo){ // Cambiar un subarbol por otro
+    public void setTree(Tree nuevo){        //Cambiar un subarbol por otro
         this.value = nuevo.value;
         this.esTerminal = nuevo.esTerminal;
 
@@ -48,23 +46,15 @@ public class Tree{
 
     }
 
-    public void updateSize(){
+    public int getSize(){
         if (esTerminal)
-            size = 1;
-        else {
-            left.updateSize();
-            right.updateSize();
-            size = 1 + left.getSize() + right.getSize();
-        }
+            return 1;
+        return 1 + left.getSize() + right.getSize();
     }
-    public void updateDepth(){
+    public int getProf(){
         if(esTerminal)
-            depth = 1;
-        else {
-            left.updateDepth();
-            right.updateDepth();
-            depth = 1 + Math.max(left.getProf(), right.getProf());
-        }
+            return 1;
+        return 1 + Math.max(left.getProf(), right.getProf());
     }
 
     public String toString(){
@@ -80,20 +70,5 @@ public class Tree{
             default:
                 return "Error";
         }
-    }
-
-    public int getSize(){
-        return size;
-    }
-
-    public int getProf(){
-        return depth;
-    }
-
-    public void iniTerminal(String value){
-        this.value = value;
-        this.esTerminal = true;
-        this.left = new Tree();
-        this.right = new Tree();
     }
 }
