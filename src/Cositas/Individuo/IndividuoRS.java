@@ -33,6 +33,8 @@ public class IndividuoRS extends Individuo<Object>{
         constructor.construir(arbol, 1);
         this.minProf = minProf;
         this.maxProf = maxProf;
+        arbol.updateSize();
+        arbol.updateDepth();
     }
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
