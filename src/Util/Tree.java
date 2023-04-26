@@ -51,16 +51,20 @@ public class Tree{
     public void updateSize(){
         if (esTerminal)
             size = 1;
-        left.updateSize();
-        right.updateSize();
-        size = 1 + left.getSize() + right.getSize();
+        else {
+            left.updateSize();
+            right.updateSize();
+            size = 1 + left.getSize() + right.getSize();
+        }
     }
     public void updateDepth(){
         if(esTerminal)
             depth = 1;
-        left.updateDepth();
-        right.updateDepth();
-        depth = 1 + Math.max(left.getProf(), right.getProf());
+        else {
+            left.updateDepth();
+            right.updateDepth();
+            depth = 1 + Math.max(left.getProf(), right.getProf());
+        }
     }
 
     public String toString(){
