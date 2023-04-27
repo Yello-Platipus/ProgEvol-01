@@ -213,9 +213,8 @@ public class MainWindow extends JFrame {
         cPanel.add(panelMutacion);
         panelTipoSeleccion.addOption(new ChoiceOption<AlgoritmoGenetico>(
                 "Tipo de seleccion", "Tipo de seleccion a utilizar",
-                "sel", new Seleccion[]{new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
-                                                new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos(),
-                                                new SeleccionRanking()}));
+                "sel", new Seleccion[]{new SeleccionRanking(), new SeleccionRuleta(), new SeleccionTorneoAleatoria(), new SeleccionTorneoDeterminista(),
+                                                new SeleccionEstocasticaUniversal(), new SeleccionTruncamiento(), new SeleccionRestos()}));
         cPanel.add(panelTipoSeleccion);
         panelTamTorneo.addOption(new IntegerOption<AlgoritmoGenetico>(
                 "Tamano del torneo", "Tamano de torneo de la seleccion por torneo",

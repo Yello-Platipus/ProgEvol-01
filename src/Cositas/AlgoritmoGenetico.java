@@ -10,6 +10,7 @@ import Cositas.Individuo.Constructores.ConstructorRampedHalf;
 import Cositas.Individuo.Individuo;
 import Cositas.Mutacion.*;
 import Cositas.Seleccion.Seleccion;
+import Cositas.Seleccion.SeleccionRanking;
 import Cositas.Seleccion.SeleccionRuleta;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class AlgoritmoGenetico {
 	private int tamTorneo;
 	private Individuo elMejor;
 	private static boolean bloating;
+	private static int averageSize;
 
 	private double elitismo;
 	private int numElite = 0;
@@ -52,7 +54,7 @@ public class AlgoritmoGenetico {
 		this.elitismo = 0.0;
 		this.d = 2;
 		this.tamTorneo = 3;
-		this.sel = new SeleccionRuleta();
+		this.sel = new SeleccionRanking();
 		this.cruce = new CruceArbol();
 		this.mut = new MutacionArbolSubarbol();
 		this.func = new FuncionRS();
@@ -65,6 +67,10 @@ public class AlgoritmoGenetico {
 		this.probMutacion = probMutacion;
 		this.precision = precision;
 
+	}
+
+	public static int getAverageSize() {
+		return averageSize;
 	}
 
 	public void evalPob(){
@@ -93,17 +99,20 @@ public class AlgoritmoGenetico {
 				poblacion.add(func.crearIndividuo(cons, profMin, profMax));
 			}
 		}
+		updateAverageSize();
 	}
 	public void selPob(){
 		poblacion = sel.seleccionar(poblacion, tamTorneo);
+		updateAverageSize();
 	}
 	public void cruzPob(){
 		poblacion = cruce.cruzar(poblacion, probCruce);
+		updateAverageSize();
 	}
 	public void mutPob(){
-		for(int i = 0; i < tamPoblacion; i++){
+		for(int i = 0; i < tamPoblacion; i++)
 			mut.mutar(poblacion.get(i), probMutacion);
-		}
+		updateAverageSize();
 	}
 
 	public double getMejorFitness() { return elMejor.getFitness();}
@@ -123,6 +132,7 @@ public class AlgoritmoGenetico {
 			poblacion.set(tamPoblacion-1-i,elite[i]);
 		}
 		Collections.sort(poblacion);
+		updateAverageSize();
 	}
 
 	public double calcularMediaGen(){
@@ -255,7 +265,15 @@ public class AlgoritmoGenetico {
 		else return a > b;
 	}
 
-	public boolean getBloating(){return bloating;}
+	public static boolean getBloating(){return bloating;}
 
 	public void setBloating(boolean bloating){this.bloating = bloating;}
+
+	public void updateAverageSize(){
+		int suma = 0;
+		for(int i = 0; i < tamPoblacion; i++){
+			suma += poblacion.get(i).getArbol().getSize();
+		}
+		averageSize = suma/tamPoblacion;
+	}
 }

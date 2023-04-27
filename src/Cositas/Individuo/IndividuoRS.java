@@ -1,5 +1,6 @@
 package Cositas.Individuo;
 
+import Cositas.AlgoritmoGenetico;
 import Cositas.Individuo.Constructores.Constructor;
 import Util.Tree;
 
@@ -25,7 +26,7 @@ public class IndividuoRS extends Individuo<Object>{
     private int minProf;
     private int maxProf;
     private double[] calculado;
-
+    private static int probBloating = 2; // 1/probBloating de que se produzca bloating
 
     public IndividuoRS(Constructor cons, int minProf, int maxProf){
         this.constructor = cons;
@@ -45,6 +46,8 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public double getFitness() {
+        if(AlgoritmoGenetico.getBloating() && arbol.getSize() > AlgoritmoGenetico.getAverageSize() && (Math.random() * Integer.MAX_VALUE) % probBloating == 0)
+            return Double.MAX_VALUE; // Tener en cuenta que esto solo es valido para minimizacion/esta funcion
         calculado = new double[101];
         int cont = 0;
         for(double i = -1; i <= 1.01; i+=0.02){
@@ -104,7 +107,6 @@ public class IndividuoRS extends Individuo<Object>{
             }
             return res;
         }
-
     }
 
     @Override
