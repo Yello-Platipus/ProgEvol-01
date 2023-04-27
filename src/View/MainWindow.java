@@ -38,6 +38,8 @@ public class MainWindow extends JFrame {
     private ConfigPanel panelElite;
     private String[] tipoIntervalo = {"Ninguno", "Porcentaje de mutacion", "Porcentaje de cruce", "Tamano de poblacion"};
     private Plot2DPanel plot;
+
+    private boolean evolution;
     private AlgoritmoGenetico ag;
     private JLabel mejorSol;
     private JComboBox<String> tipo;
@@ -149,11 +151,9 @@ public class MainWindow extends JFrame {
                 panelElite.initialize();
                 ag.setBloating(bloating.isSelected());
                 cont.run(ag, minimo, maximo, aux);
-                plot.removeAll();
                 plot = new Plot2DPanel();
                 if(aux.equalsIgnoreCase("Ninguno")){
-                    //iniGrafica();
-                    iniGrafComparativa();
+                    iniGrafica();
                     mSol =  "Mejor sol: "  + cont.getMejorIndAbs().toString();
                 }
                 else{
@@ -167,12 +167,30 @@ public class MainWindow extends JFrame {
             }
         });
 
+        JButton switchGraphButton = new JButton("Cambiar grafica");
+        switchGraphButton.setFont(new Font("Arial", Font.PLAIN, 20));
+        switchGraphButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(evolution){
+                    plot = new Plot2DPanel();
+                    iniGrafComparativa();
+                }
+                else{
+                    plot = new Plot2DPanel();
+                    iniGrafica();
+                }
+                setVisible(true);
+            }
+        });
         mejorSol = new JLabel(mSol);
         JScrollPane sPane = new JScrollPane();
         sPane.setViewportView(mejorSol);
         JPanel panelSur = new JPanel(new BorderLayout());
         ejecBoton.setFont(new Font("Arial", Font.PLAIN, 20));
-        panelSur.add(ejecBoton, BorderLayout.EAST);
+
+        panelSur.add(ejecBoton, BorderLayout.WEST);
+        panelSur.add(switchGraphButton, BorderLayout.EAST);
         panelSur.add(sPane, BorderLayout.CENTER);
 
         this.add(panelSur, BorderLayout.SOUTH);
@@ -280,7 +298,7 @@ public class MainWindow extends JFrame {
         mejorGen = cont.getMejorGen();
         mejorAbs = cont.getMejorAbs();
         mediaGen = cont.getMediaGen();
-
+        evolution = true;
         // create your PlotPanel (you can use it as a JPanel)
 
 
@@ -301,7 +319,7 @@ public class MainWindow extends JFrame {
 
     private void iniGrafComparativa(){
         mejorGraf = cont.getMejorGraf();
-
+        evolution = false;
         plot.addLegend("SOUTH");
         plot.addLinePlot("Mejor individuo", xValues, mejorGraf);
         plot.addLinePlot("Funcion original", xValues, IndividuoRS.REAL);
