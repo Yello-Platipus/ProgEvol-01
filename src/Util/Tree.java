@@ -6,6 +6,8 @@ public class Tree{
     public boolean esTerminal;
     public Tree left;
     public Tree right;
+    private int size;
+    private int depth;
 
     public Tree(){
         value = "";
@@ -21,6 +23,8 @@ public class Tree{
     public Tree(Tree n){
         this.value = n.value;
         this.esTerminal = n.esTerminal;
+        this.size = n.size;
+        this.depth = n.depth;
         if(!n.esTerminal) {
             this.right = new Tree(n.right);
             this.left = new Tree(n.left);
@@ -46,15 +50,23 @@ public class Tree{
 
     }
 
-    public int getSize(){
-        if (esTerminal)
-            return 1;
-        return 1 + left.getSize() + right.getSize();
+    public void updateValues(){
+        if(esTerminal){
+            size = 1;
+            depth = 1;
+        }
+        else{
+            left.updateValues();
+            right.updateValues();
+            size = 1 + left.getSize() + right.getSize();
+            depth = 1 + Math.max(left.getDepth(), right.getDepth());
+        }
     }
-    public int getProf(){
-        if(esTerminal)
-            return 1;
-        return 1 + Math.max(left.getProf(), right.getProf());
+    public int getSize(){
+        return size;
+    }
+    public int getDepth(){
+        return depth;
     }
 
     public String toString(){

@@ -110,19 +110,23 @@ public class AlgoritmoGenetico {
 
 	public void generarElite(){
 		this.numElite = (int)Math.round(elitismo * tamPoblacion);
-		elite = new Individuo[numElite];
-		Collections.sort(poblacion);
-		for(int i = 0; i < numElite; i++){
-			elite[i] = poblacion.get(i).clonar();
+		if(numElite != 0){
+			elite = new Individuo[numElite];
+			Collections.sort(poblacion);
+			for(int i = 0; i < numElite; i++){
+				elite[i] = poblacion.get(i).clonar();
+			}
 		}
 	}
 
 	public void introducirElite() {
-		Collections.sort(poblacion);
-		for(int i = 0; i < numElite; i++){
-			poblacion.set(tamPoblacion-1-i,elite[i]);
+		if(numElite != 0){
+			Collections.sort(poblacion);
+			for(int i = 0; i < numElite; i++){
+				poblacion.set(tamPoblacion-1-i,elite[i]);
+			}
+			Collections.sort(poblacion);
 		}
-		Collections.sort(poblacion);
 	}
 
 	public double calcularMediaGen(){
