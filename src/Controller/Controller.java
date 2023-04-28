@@ -32,7 +32,7 @@ public class Controller {
         this.ag = ag;
         this.min = min;
         this.max = max;
-        cont = (max - min)/4;
+        cont = (max - min)/10;
         maxGen = ag.getMaxGeneraciones();
         
         ag.initPob();
@@ -116,12 +116,14 @@ public class Controller {
             for(int g = 0; g < maxGen; g++){
                 iteracion();
                 double actual = ag.getMejorFitness();
-                if(ag.esMejor(mejorEjec, actual))
+                if(ag.esMejor(mejorEjec, actual)){
                     mejorEjec = actual;
+                }
             }
             if(ag.esMejor(mejorAbs[0], mejorEjec)) {
                 mejorAbs[0] = mejorEjec;
                 mejorEjecX = i;
+
             }
             numInterval[fCont] = i;
             fitnessEjec[fCont++] = mejorEjec;
