@@ -24,6 +24,7 @@ public class MutacionFuncional extends Mutacion{
             else
                 t = t.right;
         }
+        ind.updateFitness();
     }
 }
 

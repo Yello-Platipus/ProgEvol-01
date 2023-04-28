@@ -22,5 +22,6 @@ public class MutacionTerminal extends Mutacion{
         if(Math.random() < probMutacion){
             t = new Tree(Constructor.terminales[(int) (Math.random() * Constructor.terminales.length)]);
         }
+        ind.updateFitness();
     }
 }

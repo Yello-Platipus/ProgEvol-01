@@ -36,4 +36,6 @@ public abstract class Individuo<T> implements Comparable<Individuo>{
 	public abstract Tree getArbol();
 
 	public abstract double[] getGraf();
+
+	public abstract void updateFitness();
 }

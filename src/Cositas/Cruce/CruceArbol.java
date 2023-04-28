@@ -62,7 +62,9 @@ public class CruceArbol extends Cruce{
                 dos.setTree(aux);
 
                 hijo1.getArbol().updateValues();
+                hijo1.updateFitness();
                 hijo2.getArbol().updateValues();
+                hijo2.updateFitness();
             }
             cruzados.add(hijo1);
             cruzados.add(hijo2);

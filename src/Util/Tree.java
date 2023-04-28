@@ -83,4 +83,8 @@ public class Tree{
                 return "Error";
         }
     }
+
+    public void podarRama(Tree t) {
+
+    }
 }

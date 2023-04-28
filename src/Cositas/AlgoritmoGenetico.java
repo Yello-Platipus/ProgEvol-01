@@ -43,7 +43,7 @@ public class AlgoritmoGenetico {
 	private Funcion func;
 	private Constructor cons;
 	private static int profMin = 2;
-	private int profMax = 5;
+	private int profMax = 7;
 
 	public AlgoritmoGenetico(){
 		this.tamPoblacion = 100;
