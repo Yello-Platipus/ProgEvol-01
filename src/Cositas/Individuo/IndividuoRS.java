@@ -5,6 +5,8 @@ import Cositas.Individuo.Constructores.Constructor;
 import Util.Tree;
 import View.MainWindow;
 
+import java.text.DecimalFormat;
+
 public class IndividuoRS extends Individuo<Object>{
 
     public static final double[] REAL=
@@ -42,7 +44,7 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public String toString() {
-        return arbol.toString() + " " + getFitness();
+        return arbol.toString() + " " + (double)Math.round(getFitness()*1000d)/1000d;
     }
 
     @Override
