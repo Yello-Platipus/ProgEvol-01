@@ -32,6 +32,7 @@ public class MutacionArbolSubarbol extends Mutacion{
         }
         if(Math.random() < probMutacion) {
             new ConstructorCreciente().construir(t, prof);
+            ind.getArbol().updateValues();
         }
         ind.updateFitness();
     }

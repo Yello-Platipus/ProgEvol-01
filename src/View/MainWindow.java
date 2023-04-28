@@ -154,12 +154,12 @@ public class MainWindow extends JFrame {
                 plot = new Plot2DPanel();
                 if(aux.equalsIgnoreCase("Ninguno")){
                     iniGrafica();
-                    mSol =  "Mejor sol: "  + cont.getMejorIndAbs().toString();
+                    mSol =  "Mejor solucion: "  + cont.getMejorIndAbs().toString();
                 }
                 else{
                     iniGraficaInterval();
                     mSol = "La mejor ejecucion ha sido con " + cont.getMejorEjecX() +
-                            " de " + aux.toLowerCase() + ", con fitness: " + cont.getMejorAbs()[0];
+                            " de " + aux.toLowerCase() + ", con fitness: " + (double)Math.round(cont.getMejorEjec()*1000d)/1000d;
                 }
                 mejorSol.setText(mSol);
                 setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -172,13 +172,15 @@ public class MainWindow extends JFrame {
         switchGraphButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                plot = new Plot2DPanel();
                 if(evolution){
-                    plot = new Plot2DPanel();
                     iniGrafComparativa();
                 }
                 else{
-                    plot = new Plot2DPanel();
-                    iniGrafica();
+                    if(tipo.getSelectedItem().toString().equalsIgnoreCase("Ninguno"))
+                        iniGrafica();
+                    else
+                        iniGraficaInterval();
                 }
                 setVisible(true);
             }
@@ -330,6 +332,7 @@ public class MainWindow extends JFrame {
 
         fitnessEjec = cont.getFitnessEjec();
         numIntervalo = cont.getNumInterval();
+        evolution = true;
 
         plot.addLegend("SOUTH");
         plot.addLinePlot("Fitness", numIntervalo, fitnessEjec);

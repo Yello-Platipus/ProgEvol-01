@@ -45,7 +45,7 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public String toString() {
-        return arbol.toString() + " " + (double)Math.round(getFitness()*1000d)/1000d;
+        return arbol.toString() + " con fitness " + (double)Math.round(getFitness()*1000d)/1000d;
     }
 
     @Override
