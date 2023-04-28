@@ -19,14 +19,13 @@ public class IndividuoRS extends Individuo<Object>{
             2.3056, 2.39049136, 2.47951616, 2.57284336, 2.67064576, 2.7731, 2.88038656, 2.99268976, 3.11019776, 3.23310256,
             3.3616, 3.49588976, 3.63617536, 3.78266416, 3.93556736, 4.0951, 4.26148096, 4.43493296, 4.61568256, 4.80396016, 5.0};
 
-
-
     private Constructor constructor;
     private Tree arbol;
     private int minProf;
     private int maxProf;
     private double[] calculado;
     private static int probBloating = 2; // 1/probBloating de que se produzca bloating
+    private double fitness;
 
     public IndividuoRS(Constructor cons, int minProf, int maxProf){
         this.constructor = cons;
@@ -35,19 +34,24 @@ public class IndividuoRS extends Individuo<Object>{
         arbol.updateValues();
         this.minProf = minProf;
         this.maxProf = maxProf;
+        updateFitness();
     }
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
+        updateFitness();
     }
 
     @Override
     public String toString() {
-        return arbol.toString() + " " + getFitness();
+        return arbol.toString() + " : " + fitness;
     }
 
     @Override
     public double getFitness() {
-        if(AlgoritmoGenetico.getBloating() && arbol.getSize() > AlgoritmoGenetico.getAverageSize() && (Math.random() * Integer.MAX_VALUE) % probBloating == 0)
+        /*
+        if(AlgoritmoGenetico.getBloating() // Bloating activado
+                && arbol.getSize() > AlgoritmoGenetico.getAverageSize() // El numero de nodos del arbol es mayor que la media
+                && (Math.random() * Integer.MAX_VALUE) % probBloating == 0) // Probabilidad aleatoria (50%, actualmente)
             return Double.MAX_VALUE; // Tener en cuenta que esto solo es valido para minimizacion/esta funcion
         calculado = new double[101];
         for(int i = 0; i < 101; i++){
@@ -59,6 +63,8 @@ public class IndividuoRS extends Individuo<Object>{
         }
 
         return Math.sqrt(difAcum);
+        */
+        return fitness;
     }
 
     public double getFenotipo(int x) {
@@ -123,5 +129,24 @@ public class IndividuoRS extends Individuo<Object>{
         else if(this.getFitness() < o.getFitness())
             return -1;
         return 0;
+    }
+
+    public void updateFitness(){
+        if(AlgoritmoGenetico.getBloating() // Bloating activado
+                && arbol.getSize() > AlgoritmoGenetico.getAverageSize() // El numero de nodos del arbol es mayor que la media
+                && (Math.random() * Integer.MAX_VALUE) % probBloating == 0) { // Probabilidad aleatoria (50%, actualmente)
+            fitness = Double.MAX_VALUE; // Tener en cuenta que esto solo es valido para minimizacion/esta funcion
+            return;
+        }
+        calculado = new double[101];
+        for(int i = 0; i < 101; i++){
+            calculado[i] = calcularValor(arbol, MainWindow.xValues[i]);
+        }
+        double difAcum = 0;
+        for(int i = 0; i < 101; i++){
+            difAcum += Math.pow(REAL[i] - calculado[i],2);
+        }
+
+        fitness = Math.sqrt(difAcum);
     }
 }
