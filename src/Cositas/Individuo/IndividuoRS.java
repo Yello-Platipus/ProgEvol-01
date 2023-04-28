@@ -19,6 +19,8 @@ public class IndividuoRS extends Individuo<Object>{
             2.3056, 2.39049136, 2.47951616, 2.57284336, 2.67064576, 2.7731, 2.88038656, 2.99268976, 3.11019776, 3.23310256,
             3.3616, 3.49588976, 3.63617536, 3.78266416, 3.93556736, 4.0951, 4.26148096, 4.43493296, 4.61568256, 4.80396016, 5.0};
 
+
+
     private Constructor constructor;
     private Tree arbol;
     private int minProf;
@@ -43,7 +45,7 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public String toString() {
-        return arbol.toString() + " : " + fitness;
+        return arbol.toString() + " " + (double)Math.round(getFitness()*1000d)/1000d;
     }
 
     @Override
