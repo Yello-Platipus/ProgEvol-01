@@ -36,7 +36,7 @@ public class CruceArbol extends Cruce{
                 int cont1 = 0;
                 int cont2 = 0;
 
-                while(cont1 < random1){
+                while(cont1 < random1 && !cola1.isEmpty()){
                     Tree aux = cola1.peek();
                     cola1.remove();
                     if(!aux.esTerminal){
@@ -44,7 +44,7 @@ public class CruceArbol extends Cruce{
                         cola1.add(aux.right);
                     }
                     cont1++;
-                } while(cont2 < random2){
+                } while(cont2 < random2 && !cola2.isEmpty()){
                     Tree aux = cola2.peek();
                     cola2.remove();
                     if(!aux.esTerminal){
