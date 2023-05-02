@@ -97,8 +97,11 @@ public class IndividuoRS extends Individuo<Object>{
                 default:
                     res = 0;
             }
-            if(res == 0) { // TODO Borrar si da problemas
-                n = new Tree(Constructor.terminales[(int) (Math.random() * Constructor.terminales.length)]);
+            if(AlgoritmoGenetico.getBloating() && res == 0) { // TODO Borrar si da problemas
+                n.value = "0";
+                n.left = null;
+                n.right = null;
+                n.esTerminal = true;
                 res = calcularValor(n, x);
             }
             return res;
