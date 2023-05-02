@@ -73,8 +73,9 @@ public class IndividuoRS extends Individuo<Object>{
 
     private double calcularValor(Tree n, double x){
         if(n.esTerminal){
-            if(n.value.equals("x"))
+            if(n.value.equals("x")){
                 return x;
+            }
             else
                 return Integer.parseInt(n.value);
         }
@@ -97,13 +98,12 @@ public class IndividuoRS extends Individuo<Object>{
                 default:
                     res = 0;
             }
-            if(AlgoritmoGenetico.getBloating() && res == 0) { // TODO Borrar si da problemas
+            /*if(!variable && AlgoritmoGenetico.getBloating() && res == 0) { // TODO Borrar si da problemas
                 n.value = "0";
                 n.left = null;
                 n.right = null;
                 n.esTerminal = true;
-                res = calcularValor(n, x);
-            }
+            }*/
             return res;
         }
     }
