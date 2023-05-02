@@ -132,6 +132,7 @@ public class IndividuoRS extends Individuo<Object>{
 
     @Override
     public void updateFitness(){
+        //Tarpeian
         if(AlgoritmoGenetico.getBloating()){
             if(arbol.getSize() > AlgoritmoGenetico.getAverageSize() // El numero de nodos del arbol es mayor que la media
                     && (Math.random() * Integer.MAX_VALUE) % probBloating == 0) { // Probabilidad aleatoria (50%, actualmente)
@@ -149,7 +150,5 @@ public class IndividuoRS extends Individuo<Object>{
         }
 
         fitness = Math.sqrt(difAcum);
-        if(AlgoritmoGenetico.getBloating() && arbol.getDepth() > maxProf)
-            fitness *= arbol.getDepth() - maxProf;
     }
 }
