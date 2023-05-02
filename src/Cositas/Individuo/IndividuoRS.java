@@ -41,6 +41,9 @@ public class IndividuoRS extends Individuo<Object>{
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
         this.fitness = ind.getFitness();
+        this.constructor = ind.constructor;
+        this.minProf = ind.minProf;
+        this.maxProf = ind.maxProf;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class IndividuoRS extends Individuo<Object>{
         return new IndividuoRS(this);
     }
 
-    private double calcularValor(Tree n, double x){
+    private double calcularValor(Tree n, double x, int prof){
         if(n.esTerminal){
             if(n.value.equals("x")){
                 return x;
@@ -81,8 +84,8 @@ public class IndividuoRS extends Individuo<Object>{
         }
         else{
             double izq = 0, der = 0;
-            izq = calcularValor(n.left, x);
-            der = calcularValor(n.right, x);
+            izq = calcularValor(n.left, x, prof + 1);
+            der = calcularValor(n.right, x, prof + 1);
 
             double res = 0;
             switch (n.value){
@@ -98,12 +101,13 @@ public class IndividuoRS extends Individuo<Object>{
                 default:
                     res = 0;
             }
-            /*if(!variable && AlgoritmoGenetico.getBloating() && res == 0) { // TODO Borrar si da problemas
+            if(AlgoritmoGenetico.getBloating() && res == 0 && (x != -1 && x != 0 && x != 1) && prof > 2) { // TODO Borrar si da problemas
+                //constructor.construir(n, prof);
                 n.value = "0";
                 n.left = null;
                 n.right = null;
                 n.esTerminal = true;
-            }*/
+            }
             return res;
         }
     }
@@ -142,13 +146,13 @@ public class IndividuoRS extends Individuo<Object>{
         }
         calculado = new double[101];
         for(int i = 0; i < 101; i++){
-            calculado[i] = calcularValor(arbol, MainWindow.xValues[i]);
+            calculado[i] = calcularValor(arbol, MainWindow.xValues[i], 1);
         }
         double difAcum = 0;
         for(int i = 0; i < 101; i++){
             difAcum += Math.pow(REAL[i] - calculado[i],2);
         }
-
+        arbol.updateValues();
         fitness = Math.sqrt(difAcum);
     }
 }
