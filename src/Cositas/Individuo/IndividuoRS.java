@@ -26,7 +26,7 @@ public class IndividuoRS extends Individuo<Object>{
     private int minProf;
     private int maxProf;
     private double[] calculado;
-    private static int probBloating = 2; // 1/probBloating de que se produzca bloating
+    private static int probBloating = 5; // 1/probBloating de que se produzca bloating
     private double fitness;
 
     public IndividuoRS(Constructor cons, int minProf, int maxProf){
@@ -121,6 +121,12 @@ public class IndividuoRS extends Individuo<Object>{
             return 1;
         else if(this.getFitness() < o.getFitness())
             return -1;
+        // Esto ayuda a que los arboles mas pequeños se consideren mejores, a igualdad de fitness
+        // Tiene la desventaja de que aumenta el tiempo de ejecucion considerablemente (un 30% mas, aproximadamente)
+        /*else if(this.arbol.getSize() < o.getArbol().getSize())
+            return 1;
+        else if(this.arbol.getSize() > o.getArbol().getSize())
+            return -1;*/
         return 0;
     }
 
