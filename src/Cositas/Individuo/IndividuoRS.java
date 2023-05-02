@@ -97,8 +97,10 @@ public class IndividuoRS extends Individuo<Object>{
                 default:
                     res = 0;
             }
-            if(res == 0) // TODO Borrar si da problemas
-                n = new Tree(Constructor.terminales[(int)(Math.random() * Constructor.terminales.length)]);
+            if(res == 0) { // TODO Borrar si da problemas
+                n = new Tree(Constructor.terminales[(int) (Math.random() * Constructor.terminales.length)]);
+                res = calcularValor(n, x);
+            }
             return res;
         }
     }
