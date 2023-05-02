@@ -40,7 +40,7 @@ public class IndividuoRS extends Individuo<Object>{
     }
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
-        updateFitness();
+        this.fitness = ind.getFitness();
     }
 
     @Override
