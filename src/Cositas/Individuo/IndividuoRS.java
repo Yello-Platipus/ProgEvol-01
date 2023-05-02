@@ -40,7 +40,7 @@ public class IndividuoRS extends Individuo<Object>{
     }
     public IndividuoRS(IndividuoRS ind){
         this.arbol = new Tree(ind.getArbol());
-        updateFitness();
+        this.fitness = ind.getFitness();
     }
 
     @Override
@@ -97,9 +97,9 @@ public class IndividuoRS extends Individuo<Object>{
                 default:
                     res = 0;
             }
-            if(res == 0) { // TODO Borrar si da problemas
-                n = new Tree(Constructor.terminales[(int) (Math.random() * Constructor.terminales.length)]);
-                res = calcularValor(n, x);
+            if(res == 0 && AlgoritmoGenetico.getBloating()) { // TODO Borrar si da problemas
+                n = new Tree("0");
+                n.esTerminal = true;
             }
             return res;
         }
